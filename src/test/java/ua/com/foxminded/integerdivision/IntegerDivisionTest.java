@@ -1,4 +1,4 @@
-package ua.com.foxminded.integer_division;
+package ua.com.foxminded.integerdivision;
 
 import java.util.ArrayList;
 
@@ -47,6 +47,19 @@ public class IntegerDivisionTest {
 		outputString.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + "\n");
 		outputString.append(integerDivision.createString(divisionArrayList, dividend, divider));
 		String testString = "_78945|4\n 4    |-----\n -    |19736\n_38\n 36\n --\n _29\n  28\n  --\n  _14\n   12\n   --\n   _25\n    24\n    --\n     1";
+		TestCase.assertEquals(testString, outputString.toString());
+	}
+
+	@Test
+	public void given234And23456_onIntegerDivision_thenGetString() {
+		Integer dividend = 234;
+		Integer divider = 23456;
+		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.createDivisionArrayList(dividend, divider);
+
+		StringBuilder outputString = new StringBuilder();
+		outputString.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + "\n");
+		outputString.append(integerDivision.createString(divisionArrayList, dividend, divider));
+		String testString = "234|23456\n   |-----\n   |0\n";
 		TestCase.assertEquals(testString, outputString.toString());
 	}
 

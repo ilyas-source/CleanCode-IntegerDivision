@@ -1,13 +1,25 @@
-package ua.com.foxminded.integer_division;
+package ua.com.foxminded.integerdivision;
 
 import java.util.ArrayList;
 
 public class IntegerDivision {
 	public ArrayList<ArrayList<Integer>> createDivisionArrayList(Integer dividend, Integer divider) {
-		ArrayList<ArrayList<Integer>> outputArray = new ArrayList<ArrayList<Integer>>();
-		ArrayList<Integer> iterationArrayList = new ArrayList<>();
 
+		ArrayList<Integer> iterationArrayList = new ArrayList<>();
+		ArrayList<ArrayList<Integer>> outputArray = new ArrayList<ArrayList<Integer>>();
 		dividend = Math.abs(dividend);
+
+		if (dividend < divider) {
+			iterationArrayList.add(0);
+			iterationArrayList.add(0);
+			outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
+			return outputArray;
+		}
+
+		if (divider == 0) {
+			System.out.println("Division by zero, terminating.");
+			System.exit(0);
+		}
 
 		Integer divisionDigit = 0;
 		Integer partialDividend = subInteger(dividend, 0, 1);
@@ -65,6 +77,17 @@ public class IntegerDivision {
 
 		Integer partialDividend = divisionArrayList.get(0).get(0);
 		Integer divisionDigit = divisionArrayList.get(0).get(1);
+
+		if ((divisionArrayList.size() == 1) && (partialDividend + divisionDigit == 0)) {
+			result.append(dividend.toString() + "|" + divider.toString() + "\n");
+			result = addSpaces(result, getIntegerLength(dividend));
+			result.append("|");
+			result = addDashes(result, getIntegerLength(divider));
+			result.append("\n");
+			result = addSpaces(result, getIntegerLength(dividend));
+			result.append("|0");
+			return result.toString();
+		}
 
 		Integer index = getIntegerLength(partialDividend) - 1;
 
