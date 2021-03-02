@@ -92,8 +92,9 @@ public class IntegerDivision {
 		Integer index = getIntegerLength(partialDividend) - 1;
 
 		Integer multiplication = divider * divisionDigit;
-		result.append(" " + multiplication.toString());
 
+		result.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + "\n");
+		result.append(" " + multiplication.toString());
 		result = addSpaces(result, getIntegerLength(dividend) - index - 1);
 		result.append("|");
 		result = addDashes(result, divisionArrayList.size());

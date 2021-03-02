@@ -26,11 +26,7 @@ public class Main {
 		IntegerDivision integerDivision = new IntegerDivision();
 
 		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.createDivisionArrayList(dividend, divider);
-
-		StringBuilder outputString = new StringBuilder();
-		outputString.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + "\n");
-		outputString.append(integerDivision.createString(divisionArrayList, dividend, divider));
-		System.out.println(outputString);
+		System.out.println(integerDivision.createString(divisionArrayList, dividend, divider));
 	}
 
 }
