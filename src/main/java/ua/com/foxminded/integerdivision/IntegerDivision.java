@@ -95,12 +95,12 @@ public class IntegerDivision {
 
 		Integer multiplication = divider * divisionDigit;
 
-		result.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + "\n");
+		result.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + LS);
 		result.append(" " + multiplication.toString());
 		result = addSpaces(result, getIntegerLength(dividend) - index - 1);
 		result.append("|");
 		result = addDashes(result, divisionArrayList.size());
-		result.append("\n ");
+		result.append(LS + " ");
 		result = addSpaces(result, index - getIntegerLength(multiplication));
 		result = addDashes(result, multiplication.toString().length());
 		result = addSpaces(result, getIntegerLength(dividend) - index - 1);
@@ -108,7 +108,7 @@ public class IntegerDivision {
 		for (int j = 0; j < divisionArrayList.size(); j++) {
 			result.append(divisionArrayList.get(j).get(1).toString());
 		}
-		result.append("\n");
+		result.append(LS);
 		index++;
 
 		int j = 1;
@@ -126,14 +126,14 @@ public class IntegerDivision {
 
 				int spaces = index + 1 - getIntegerLength(partialDividend);
 				result = addSpaces(result, spaces);
-				result.append("_" + partialDividend.toString() + "\n");
+				result.append("_" + partialDividend.toString() + LS);
 				multiplication = divider * divisionArrayList.get(j).get(1);
 				spaces = index + 2 - getIntegerLength(multiplication);
 				result = addSpaces(result, spaces);
-				result.append(multiplication.toString() + "\n");
+				result.append(multiplication.toString() + LS);
 				result = addSpaces(result, spaces);
 				result = addDashes(result, multiplication.toString().length());
-				result.append("\n");
+				result.append(LS);
 			}
 			if (j == divisionArrayList.size() - 1) {
 

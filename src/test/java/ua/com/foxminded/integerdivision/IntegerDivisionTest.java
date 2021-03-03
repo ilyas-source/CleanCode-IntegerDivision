@@ -20,8 +20,7 @@ public class IntegerDivisionTest {
 		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.createDivisionArrayList(dividend, divider);
 
 		String outputString = integerDivision.createString(divisionArrayList, dividend, divider);
-		String testString = "_12346|12345\n 12345|-\n -----|1\n";
-
+		String testString = "_12346|12345" + LS + " 12345|-" + LS + " -----|1" + LS;
 		TestCase.assertEquals(testString, outputString);
 	}
 
@@ -32,7 +31,8 @@ public class IntegerDivisionTest {
 		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.createDivisionArrayList(dividend, divider);
 
 		String outputString = integerDivision.createString(divisionArrayList, dividend, divider);
-		String testString = "_4050225|45\n 405    |-----\n ---    |90005\n    _225\n     225\n     ---\n       0";
+		String testString = "_4050225|45" + LS + " 405    |-----" + LS + " ---    |90005" + LS;
+		testString += "    _225" + LS + "     225" + LS + "     ---" + LS + "       0";
 		TestCase.assertEquals(testString, outputString);
 	}
 
@@ -43,7 +43,10 @@ public class IntegerDivisionTest {
 		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.createDivisionArrayList(dividend, divider);
 
 		String outputString = integerDivision.createString(divisionArrayList, dividend, divider);
-		String testString = "_78945|4\n 4    |-----\n -    |19736\n_38\n 36\n --\n _29\n  28\n  --\n  _14\n   12\n   --\n   _25\n    24\n    --\n     1";
+		String testString = "_78945|4" + LS + " 4    |-----" + LS + " -    |19736";
+		testString += LS + "_38" + LS + " 36" + LS + " --" + LS + " _29" + LS + "  28" + LS + "  --";
+		testString += LS + "  _14" + LS + "   12" + LS + "   --" + LS + "   _25" + LS + "    24" + LS + "    --" + LS
+				+ "     1";
 		TestCase.assertEquals(testString, outputString);
 	}
 
