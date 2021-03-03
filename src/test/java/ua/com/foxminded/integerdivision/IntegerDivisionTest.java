@@ -11,6 +11,8 @@ public class IntegerDivisionTest {
 	IntegerDivision integerDivision = new IntegerDivision();
 	String testString;
 
+	private static final String LS = System.lineSeparator();
+
 	@Test
 	public void given123456And12345_onIntegerDivision_thenGetString() {
 		Integer dividend = 12346;
@@ -52,7 +54,7 @@ public class IntegerDivisionTest {
 		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.createDivisionArrayList(dividend, divider);
 
 		String outputString = integerDivision.createString(divisionArrayList, dividend, divider);
-		String testString = "234|23456\n   |-----\n   |0";
+		String testString = "234|23456" + LS + "   |-----" + LS + "   |0";
 		TestCase.assertEquals(testString, outputString);
 	}
 

@@ -11,15 +11,10 @@ public class Main {
 		int dividend = 0;
 		int divider = 1;
 
-		try {
-			System.out.println("Enter the dividend:");
-			dividend = scanner.nextInt();
-			System.out.println("Enter the divider:");
-			divider = scanner.nextInt();
-		} catch (InputMismatchException inputMismatchException) {
-			System.out.println("Input mismatch, terminating.");
-			System.exit(0);
-		}
+		System.out.println("Enter the dividend:");
+		dividend = scanner.nextInt();
+		System.out.println("Enter the divider:");
+		divider = scanner.nextInt();
 
 		scanner.close();
 

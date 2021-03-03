@@ -72,6 +72,8 @@ public class IntegerDivision {
 
 	}
 
+	public static final String LS = System.lineSeparator();
+
 	public String createString(ArrayList<ArrayList<Integer>> divisionArrayList, Integer dividend, Integer divider) {
 		StringBuilder result = new StringBuilder();
 
@@ -79,11 +81,11 @@ public class IntegerDivision {
 		Integer divisionDigit = divisionArrayList.get(0).get(1);
 
 		if ((divisionArrayList.size() == 1) && (partialDividend + divisionDigit == 0)) {
-			result.append(dividend.toString() + "|" + divider.toString() + "\n");
+			result.append(dividend.toString() + "|" + divider.toString() + LS);
 			result = addSpaces(result, getIntegerLength(dividend));
 			result.append("|");
 			result = addDashes(result, getIntegerLength(divider));
-			result.append("\n");
+			result.append(LS);
 			result = addSpaces(result, getIntegerLength(dividend));
 			result.append("|0");
 			return result.toString();
