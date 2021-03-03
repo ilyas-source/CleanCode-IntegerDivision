@@ -22,10 +22,10 @@ public class IntegerDivision {
 			System.exit(0);
 		}
 
-		Integer divisionDigit = 0;
-		Integer partialDividend = subInteger(dividend, 0, 1);
-		Integer index = 1;
-		Integer additionalDigitsCount = 1;
+		int divisionDigit = 0;
+		int partialDividend = subInteger(dividend, 0, 1);
+		int index = 1;
+		int additionalDigitsCount = 1;
 
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
@@ -37,12 +37,12 @@ public class IntegerDivision {
 			iterationArrayList.clear();
 		}
 
-		while (index < getIntegerLength(dividend)) {
+		while (index < integerLength(dividend)) {
 			while (partialDividend < divider) {
 				Integer subInteger = subInteger(dividend, index, additionalDigitsCount);
 				Integer tempDividend = (int) (partialDividend * Math.pow(10, additionalDigitsCount) + subInteger);
 				if (tempDividend < divider) {
-					if (index + additionalDigitsCount == getIntegerLength(dividend)) {
+					if (index + additionalDigitsCount == integerLength(dividend)) {
 						partialDividend = (int) (partialDividend * Math.pow(10, additionalDigitsCount) + subInteger);
 						break;
 					}
@@ -74,14 +74,14 @@ public class IntegerDivision {
 	}
 
 	private Integer getNthDigit(Integer sourceInteger, int position) {
-		int length = getIntegerLength(sourceInteger);
+		int length = integerLength(sourceInteger);
 
 		return sourceInteger / (int) Math.pow(10, length - position) % 10;
 	}
 
 	private Integer subInteger(Integer sourceInteger, Integer startPosition, Integer count) {
-		Integer[] digits = new Integer[getIntegerLength(sourceInteger)];
-		for (int i = 0; i < getIntegerLength(sourceInteger); i++) {
+		Integer[] digits = new Integer[integerLength(sourceInteger)];
+		for (int i = 0; i < integerLength(sourceInteger); i++) {
 			digits[i] = getNthDigit(sourceInteger, i + 1);
 		}
 		Integer result = 0;
@@ -94,7 +94,7 @@ public class IntegerDivision {
 
 	}
 
-	private Integer getIntegerLength(Integer sourceInteger) {
+	private Integer integerLength(Integer sourceInteger) {
 		if (sourceInteger == 0) {
 			return 0;
 		} else {
