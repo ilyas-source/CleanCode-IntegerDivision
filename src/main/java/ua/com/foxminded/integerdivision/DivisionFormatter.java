@@ -14,28 +14,28 @@ public class DivisionFormatter {
 
 		if ((divisionArrayList.size() == 1) && (partialDividend + divisionDigit == 0)) {
 			result.append(dividend.toString() + "|" + divider.toString() + LS);
-			result = addSpaces(result, getIntegerLength(dividend));
+			result = addSpaces(result, integerLength(dividend));
 			result.append("|");
-			result = addDashes(result, getIntegerLength(divider));
+			result = addDashes(result, integerLength(divider));
 			result.append(LS);
-			result = addSpaces(result, getIntegerLength(dividend));
+			result = addSpaces(result, integerLength(dividend));
 			result.append("|0");
 			return result.toString();
 		}
 
-		Integer index = getIntegerLength(partialDividend) - 1;
+		Integer index = integerLength(partialDividend) - 1;
 
 		Integer multiplication = divider * divisionDigit;
 
 		result.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + LS);
 		result.append(" " + multiplication.toString());
-		result = addSpaces(result, getIntegerLength(dividend) - index - 1);
+		result = addSpaces(result, integerLength(dividend) - index - 1);
 		result.append("|");
 		result = addDashes(result, divisionArrayList.size());
 		result.append(LS + " ");
-		result = addSpaces(result, index - getIntegerLength(multiplication));
+		result = addSpaces(result, index - integerLength(multiplication));
 		result = addDashes(result, multiplication.toString().length());
-		result = addSpaces(result, getIntegerLength(dividend) - index - 1);
+		result = addSpaces(result, integerLength(dividend) - index - 1);
 		result.append("|");
 		for (int j = 0; j < divisionArrayList.size(); j++) {
 			result.append(divisionArrayList.get(j).get(1).toString());
@@ -48,19 +48,19 @@ public class DivisionFormatter {
 			partialDividend = divisionArrayList.get(j).get(0);
 			divisionDigit = divisionArrayList.get(j).get(1);
 
-			if ((partialDividend < divider) && (index == getIntegerLength(dividend) - 1)) {
-				result = addSpaces(result, index + 2 - getIntegerLength(partialDividend));
+			if ((partialDividend < divider) && (index == integerLength(dividend) - 1)) {
+				result = addSpaces(result, index + 2 - integerLength(partialDividend));
 				result.append(partialDividend.toString());
 				break;
 			}
 
 			if (partialDividend + divisionDigit > 0) {
 
-				int spaces = index + 1 - getIntegerLength(partialDividend);
+				int spaces = index + 1 - integerLength(partialDividend);
 				result = addSpaces(result, spaces);
 				result.append("_" + partialDividend.toString() + LS);
 				multiplication = divider * divisionArrayList.get(j).get(1);
-				spaces = index + 2 - getIntegerLength(multiplication);
+				spaces = index + 2 - integerLength(multiplication);
 				result = addSpaces(result, spaces);
 				result.append(multiplication.toString() + LS);
 				result = addSpaces(result, spaces);
@@ -72,7 +72,7 @@ public class DivisionFormatter {
 				partialDividend = divisionArrayList.get(j).get(0);
 				Integer remainder = 0;
 				remainder = partialDividend - multiplication;
-				int spaces = index + 1 - getIntegerLength(remainder);
+				int spaces = index + 1 - integerLength(remainder);
 				if (remainder > 0)
 					spaces++;
 				result = addSpaces(result, spaces);
@@ -102,7 +102,7 @@ public class DivisionFormatter {
 		return result;
 	}
 
-	private Integer getIntegerLength(Integer sourceInteger) {
+	private Integer integerLength(Integer sourceInteger) {
 		if (sourceInteger == 0) {
 			return 0;
 		} else {

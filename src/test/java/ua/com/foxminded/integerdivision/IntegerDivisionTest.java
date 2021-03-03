@@ -56,7 +56,6 @@ public class IntegerDivisionTest {
 		Integer dividend = 234;
 		Integer divider = 23456;
 		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.divide(dividend, divider);
-
 		String outputString = formatter.format(divisionArrayList, dividend, divider);
 		String testString = "234|23456" + LS + "   |-----" + LS + "   |0";
 		TestCase.assertEquals(testString, outputString);

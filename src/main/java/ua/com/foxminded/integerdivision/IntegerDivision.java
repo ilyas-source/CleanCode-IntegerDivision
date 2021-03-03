@@ -23,9 +23,7 @@ public class IntegerDivision {
 		}
 
 		int divisionDigit = 0;
-		int partialDividend = subInteger(dividend, 0, 1);
-		int index = 1;
-		int additionalDigitsCount = 1;
+		int partialDividend = subInteger(dividend, 0, 0);
 
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
@@ -37,38 +35,32 @@ public class IntegerDivision {
 			iterationArrayList.clear();
 		}
 
-		while (index < integerLength(dividend)) {
-			while (partialDividend < divider) {
-				Integer subInteger = subInteger(dividend, index, additionalDigitsCount);
-				Integer tempDividend = (int) (partialDividend * Math.pow(10, additionalDigitsCount) + subInteger);
-				if (tempDividend < divider) {
-					if (index + additionalDigitsCount == integerLength(dividend)) {
-						partialDividend = (int) (partialDividend * Math.pow(10, additionalDigitsCount) + subInteger);
-						break;
-					}
-					if (!outputArray.isEmpty()) {
+		int startPosition = 1;
+		int remainder = partialDividend;
 
-						iterationArrayList.add(0);
-						iterationArrayList.add(0);
-						outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
-						iterationArrayList.clear();
-					}
+		for (int index = 1; index < integerLength(dividend); index++) {
+			int subInteger = subInteger(dividend, startPosition, index);
+			partialDividend = (int) (subInteger + remainder * Math.pow(10, index - startPosition + 1));
 
-					additionalDigitsCount++;
-				} else {
-					partialDividend = tempDividend;
-					index += additionalDigitsCount;
-					additionalDigitsCount = 1;
+			if (partialDividend < divider) {
+				if (!outputArray.isEmpty()) {
+					iterationArrayList.add(0);
+					iterationArrayList.add(0);
+					outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
+					iterationArrayList.clear();
 				}
+			} else {
+				divisionDigit = partialDividend / divider;
+				iterationArrayList.add(partialDividend);
+				iterationArrayList.add(divisionDigit);
+				outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
+				partialDividend = partialDividend - divider * divisionDigit;
+				remainder = partialDividend;
+				iterationArrayList.clear();
+				startPosition = index + 1;
 			}
-
-			divisionDigit = partialDividend / divider;
-			iterationArrayList.add(partialDividend);
-			iterationArrayList.add(divisionDigit);
-			outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
-			partialDividend = partialDividend - divider * divisionDigit;
-			iterationArrayList.clear();
 		}
+
 		return outputArray;
 
 	}
@@ -79,19 +71,21 @@ public class IntegerDivision {
 		return sourceInteger / (int) Math.pow(10, length - position) % 10;
 	}
 
-	private Integer subInteger(Integer sourceInteger, Integer startPosition, Integer count) {
+	public Integer subInteger(Integer sourceInteger, Integer startPosition, Integer endPosition) {
+
 		Integer[] digits = new Integer[integerLength(sourceInteger)];
 		for (int i = 0; i < integerLength(sourceInteger); i++) {
 			digits[i] = getNthDigit(sourceInteger, i + 1);
 		}
+
 		Integer result = 0;
 		int index = startPosition;
+		int count = endPosition - startPosition + 1;
 		for (int i = count - 1; i >= 0; i--) {
 			result = (int) (result + digits[index] * Math.pow(10, i));
 			index++;
 		}
 		return result;
-
 	}
 
 	private Integer integerLength(Integer sourceInteger) {
