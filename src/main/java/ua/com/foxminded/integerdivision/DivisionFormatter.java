@@ -7,47 +7,21 @@ public class DivisionFormatter {
 	public static final String CR = System.lineSeparator();
 
 	public String format(ArrayList<Integer> inputArray, int dividend, int divider) {
-		StringBuilder result = new StringBuilder();
 
 		int partialDividend = inputArray.get(0);
-		int divisionDigit = partialDividend / divider;
 
 		if ((inputArray.size() == 1) && (partialDividend == 0)) {
-			result.append(String.valueOf(dividend) + "|" + String.valueOf(divider) + CR);
-			result = addChars(result, " ", intLength(dividend));
-			result.append("|");
-			result = addChars(result, "-", intLength(divider));
-			result.append(CR);
-			result = addChars(result, " ", intLength(dividend));
-			result.append("|0");
-			return result.toString();
+			return simpleDivision(dividend, divider);
 		}
 
-		int index = intLength(partialDividend) - 1;
+		StringBuilder result = new StringBuilder(createHeader(inputArray, dividend, divider));
 
-		int multiplication = divider * divisionDigit;
-
-		result.append("_" + dividend + "|" + divider + CR);
-		result.append(" " + multiplication);
-		result = addChars(result, " ", intLength(dividend) - index - 1);
-		result.append("|");
-		result = addChars(result, "-", inputArray.size());
-		result.append(CR + " ");
-		result = addChars(result, " ", index - intLength(multiplication));
-		result = addChars(result, "-", String.valueOf(multiplication).length());
-		result = addChars(result, " ", intLength(dividend) - index - 1);
-		result.append("|");
-		for (int j = 0; j < inputArray.size(); j++) {
-			divisionDigit = inputArray.get(j) / divider;
-			result.append(String.valueOf(divisionDigit));
-		}
-		result.append(CR);
-		index++;
-
+		int index = intLength(partialDividend);
 		int j = 1;
 		while (j < inputArray.size()) {
 			partialDividend = inputArray.get(j);
-			divisionDigit = partialDividend / divider;
+			int divisionDigit = partialDividend / divider;
+			int multiplication = 0;
 
 			if ((partialDividend < divider) && (index == intLength(dividend) - 1)) {
 				result = addChars(result, " ", index + 2 - intLength(partialDividend));
@@ -55,7 +29,7 @@ public class DivisionFormatter {
 				break;
 			}
 
-			if (partialDividend + divisionDigit > 0) {
+			if (partialDividend > 0) {
 
 				int spaces = index + 1 - intLength(partialDividend);
 				result = addChars(result, " ", spaces);
@@ -63,7 +37,7 @@ public class DivisionFormatter {
 				multiplication = divider * divisionDigit;
 				spaces = index + 2 - intLength(multiplication);
 				result = addChars(result, " ", spaces);
-				result.append(String.valueOf(multiplication) + CR);
+				result.append(multiplication + CR);
 				result = addChars(result, " ", spaces);
 				result = addChars(result, "-", String.valueOf(multiplication).length());
 				result.append(CR);
@@ -84,6 +58,45 @@ public class DivisionFormatter {
 			}
 			j++;
 		}
+		return result.toString();
+	}
+
+	private String createHeader(ArrayList<Integer> inputArray, int dividend, int divider) {
+		StringBuilder result = new StringBuilder();
+
+		int divisionDigit = inputArray.get(0) / divider;
+		int multiplication = divider * divisionDigit;
+		int index = intLength(inputArray.get(0)) - 1;
+
+		result.append("_" + dividend + "|" + divider + CR);
+		result.append(" " + multiplication);
+		result = addChars(result, " ", intLength(dividend) - index - 1);
+		result.append("|");
+		result = addChars(result, "-", inputArray.size());
+		result.append(CR + " ");
+		result = addChars(result, " ", index - intLength(multiplication));
+		result = addChars(result, "-", String.valueOf(multiplication).length());
+		result = addChars(result, " ", intLength(dividend) - index - 1);
+		result.append("|");
+		for (int j = 0; j < inputArray.size(); j++) {
+			divisionDigit = inputArray.get(j) / divider;
+			result.append(String.valueOf(divisionDigit));
+		}
+		result.append(CR);
+
+		return result.toString();
+	}
+
+	private String simpleDivision(int dividend, int divider) {
+		StringBuilder result = new StringBuilder();
+		result.append(String.valueOf(dividend) + "|" + String.valueOf(divider) + CR);
+		result = addChars(result, " ", intLength(dividend));
+		result.append("|");
+		result = addChars(result, "-", intLength(divider));
+		result.append(CR);
+		result = addChars(result, " ", intLength(dividend));
+		result.append("|0");
+
 		return result.toString();
 	}
 
