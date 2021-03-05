@@ -16,6 +16,7 @@ public class Main {
 		scanner.close();
 
 		IntegerDivision integerDivision = new IntegerDivision();
+
 		try {
 			ArrayList<Integer> result = integerDivision.divide(dividend, divider);
 			DivisionFormatter formatter = new DivisionFormatter();
@@ -23,7 +24,6 @@ public class Main {
 		} catch (Exception arithmeticException) {
 			System.out.println("Division by zero.");
 		}
-
 	}
 
 }

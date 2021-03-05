@@ -19,8 +19,8 @@ public class IntegerDivisionTest {
 
 	@Test
 	public void given123456And12345_onIntegerDivision_thenGetString() {
-		Integer dividend = 12346;
-		Integer divider = 12345;
+		int dividend = 12346;
+		int divider = 12345;
 		ArrayList<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
 
 		String outputString = formatter.format(divisionArrayList, dividend, divider);
@@ -30,8 +30,8 @@ public class IntegerDivisionTest {
 
 	@Test
 	public void given4050225And405_onIntegerDivision_thenGetString() {
-		Integer dividend = 4050225;
-		Integer divider = 45;
+		int dividend = 4050225;
+		int divider = 45;
 		ArrayList<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
 
 		String outputString = formatter.format(divisionArrayList, dividend, divider);
@@ -42,8 +42,8 @@ public class IntegerDivisionTest {
 
 	@Test
 	public void given78945And4_onIntegerDivision_thenGetString() {
-		Integer dividend = 78945;
-		Integer divider = 4;
+		int dividend = 78945;
+		int divider = 4;
 		ArrayList<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
 
 		String outputString = formatter.format(divisionArrayList, dividend, divider);
@@ -56,8 +56,8 @@ public class IntegerDivisionTest {
 
 	@Test
 	public void given234And23456_onIntegerDivision_thenGetString() {
-		Integer dividend = 234;
-		Integer divider = 23456;
+		int dividend = 234;
+		int divider = 23456;
 		ArrayList<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
 		String outputString = formatter.format(divisionArrayList, dividend, divider);
 		String testString = "234|23456" + CR + "   |-----" + CR + "   |0";
@@ -66,10 +66,10 @@ public class IntegerDivisionTest {
 
 	@Test
 	public void given123And0_onDivide_thenThrowsException() throws ArithmeticException {
-		Integer dividend = 123;
-		Integer divider = 0;
+		int dividend = 123;
+		int divider = 0;
 		Throwable thrown = assertThrows(ArithmeticException.class, () -> {
-			ArrayList<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
+			integerDivision.divide(dividend, divider);
 		});
 		assertNotNull(thrown.getMessage());
 	}

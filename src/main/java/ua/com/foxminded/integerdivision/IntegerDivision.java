@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class IntegerDivision {
 
-	public ArrayList<Integer> divide(Integer dividend, Integer divider) throws ArithmeticException {
+	public ArrayList<Integer> divide(int dividend, int divider) throws ArithmeticException {
 
-		ArrayList<Integer> outputArray = new ArrayList<Integer>();
+		ArrayList<Integer> outputArray = new ArrayList<>();
 		dividend = Math.abs(dividend);
 
 		if (dividend < divider) {
@@ -15,7 +15,7 @@ public class IntegerDivision {
 		}
 
 		int divisionDigit = 0;
-		int partialDividend = subInteger(dividend, 0, 0);
+		int partialDividend = subInt(dividend, 0, 0);
 
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
@@ -26,9 +26,9 @@ public class IntegerDivision {
 		int startPosition = 1;
 		int remainder = partialDividend;
 
-		for (int index = 1; index < integerLength(dividend); index++) {
-			int subInteger = subInteger(dividend, startPosition, index);
-			partialDividend = (int) (subInteger + remainder * Math.pow(10, index - startPosition + 1));
+		for (int index = 1; index < intLength(dividend); index++) {
+			int subInt = subInt(dividend, startPosition, index);
+			partialDividend = (int) (subInt + remainder * Math.pow(10, index - startPosition + 1));
 
 			if (partialDividend < divider) {
 				if (!outputArray.isEmpty()) {
@@ -46,20 +46,20 @@ public class IntegerDivision {
 
 	}
 
-	private Integer getNthDigit(Integer sourceInteger, int position) {
-		int length = integerLength(sourceInteger);
+	private Integer getNthDigit(int sourceInt, int position) {
+		int length = intLength(sourceInt);
 
-		return sourceInteger / (int) Math.pow(10, length - position) % 10;
+		return sourceInt / (int) Math.pow(10, length - position) % 10;
 	}
 
-	public Integer subInteger(Integer sourceInteger, Integer startPosition, Integer endPosition) {
+	public int subInt(int sourceInt, int startPosition, int endPosition) {
 
-		Integer[] digits = new Integer[integerLength(sourceInteger)];
-		for (int i = 0; i < integerLength(sourceInteger); i++) {
-			digits[i] = getNthDigit(sourceInteger, i + 1);
+		int[] digits = new int[intLength(sourceInt)];
+		for (int i = 0; i < intLength(sourceInt); i++) {
+			digits[i] = getNthDigit(sourceInt, i + 1);
 		}
 
-		Integer result = 0;
+		int result = 0;
 		int index = startPosition;
 		int count = endPosition - startPosition + 1;
 		for (int i = count - 1; i >= 0; i--) {
@@ -69,13 +69,12 @@ public class IntegerDivision {
 		return result;
 	}
 
-	private Integer integerLength(Integer sourceInteger) {
-		if (sourceInteger == 0) {
+	private int intLength(int sourceInt) {
+		if (sourceInt == 0) {
 			return 0;
 		} else {
-			return (int) (Math.log10(sourceInteger) + 1);
+			return (int) (Math.log10(sourceInt) + 1);
 		}
-
 	}
 
 }

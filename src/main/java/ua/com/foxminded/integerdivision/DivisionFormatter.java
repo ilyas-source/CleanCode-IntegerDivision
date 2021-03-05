@@ -6,78 +6,78 @@ public class DivisionFormatter {
 
 	public static final String CR = System.lineSeparator();
 
-	public String format(ArrayList<Integer> divisionArrayList, Integer dividend, Integer divider) {
+	public String format(ArrayList<Integer> inputArray, int dividend, int divider) {
 		StringBuilder result = new StringBuilder();
 
-		Integer partialDividend = divisionArrayList.get(0);
-		Integer divisionDigit = partialDividend / divider;
+		int partialDividend = inputArray.get(0);
+		int divisionDigit = partialDividend / divider;
 
-		if ((divisionArrayList.size() == 1) && (partialDividend + divisionDigit == 0)) {
-			result.append(dividend.toString() + "|" + divider.toString() + CR);
-			result = addSymbols(result, " ", integerLength(dividend));
+		if ((inputArray.size() == 1) && (partialDividend == 0)) {
+			result.append(String.valueOf(dividend) + "|" + String.valueOf(divider) + CR);
+			result = addChars(result, " ", intLength(dividend));
 			result.append("|");
-			result = addSymbols(result, "-", integerLength(divider));
+			result = addChars(result, "-", intLength(divider));
 			result.append(CR);
-			result = addSymbols(result, " ", integerLength(dividend));
+			result = addChars(result, " ", intLength(dividend));
 			result.append("|0");
 			return result.toString();
 		}
 
-		Integer index = integerLength(partialDividend) - 1;
+		int index = intLength(partialDividend) - 1;
 
-		Integer multiplication = divider * divisionDigit;
+		int multiplication = divider * divisionDigit;
 
-		result.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + CR);
-		result.append(" " + multiplication.toString());
-		result = addSymbols(result, " ", integerLength(dividend) - index - 1);
+		result.append("_" + dividend + "|" + divider + CR);
+		result.append(" " + multiplication);
+		result = addChars(result, " ", intLength(dividend) - index - 1);
 		result.append("|");
-		result = addSymbols(result, "-", divisionArrayList.size());
+		result = addChars(result, "-", inputArray.size());
 		result.append(CR + " ");
-		result = addSymbols(result, " ", index - integerLength(multiplication));
-		result = addSymbols(result, "-", multiplication.toString().length());
-		result = addSymbols(result, " ", integerLength(dividend) - index - 1);
+		result = addChars(result, " ", index - intLength(multiplication));
+		result = addChars(result, "-", String.valueOf(multiplication).length());
+		result = addChars(result, " ", intLength(dividend) - index - 1);
 		result.append("|");
-		for (int j = 0; j < divisionArrayList.size(); j++) {
-			divisionDigit = divisionArrayList.get(j) / divider;
-			result.append(divisionDigit.toString());
+		for (int j = 0; j < inputArray.size(); j++) {
+			divisionDigit = inputArray.get(j) / divider;
+			result.append(String.valueOf(divisionDigit));
 		}
 		result.append(CR);
 		index++;
 
 		int j = 1;
-		while (j < divisionArrayList.size()) {
-			partialDividend = divisionArrayList.get(j);
+		while (j < inputArray.size()) {
+			partialDividend = inputArray.get(j);
 			divisionDigit = partialDividend / divider;
 
-			if ((partialDividend < divider) && (index == integerLength(dividend) - 1)) {
-				result = addSymbols(result, " ", index + 2 - integerLength(partialDividend));
-				result.append(partialDividend.toString());
+			if ((partialDividend < divider) && (index == intLength(dividend) - 1)) {
+				result = addChars(result, " ", index + 2 - intLength(partialDividend));
+				result.append(String.valueOf(partialDividend));
 				break;
 			}
 
 			if (partialDividend + divisionDigit > 0) {
 
-				int spaces = index + 1 - integerLength(partialDividend);
-				result = addSymbols(result, " ", spaces);
-				result.append("_" + partialDividend.toString() + CR);
+				int spaces = index + 1 - intLength(partialDividend);
+				result = addChars(result, " ", spaces);
+				result.append("_" + partialDividend + CR);
 				multiplication = divider * divisionDigit;
-				spaces = index + 2 - integerLength(multiplication);
-				result = addSymbols(result, " ", spaces);
-				result.append(multiplication.toString() + CR);
-				result = addSymbols(result, " ", spaces);
-				result = addSymbols(result, "-", multiplication.toString().length());
+				spaces = index + 2 - intLength(multiplication);
+				result = addChars(result, " ", spaces);
+				result.append(String.valueOf(multiplication) + CR);
+				result = addChars(result, " ", spaces);
+				result = addChars(result, "-", String.valueOf(multiplication).length());
 				result.append(CR);
 			}
-			if (j == divisionArrayList.size() - 1) {
+			if (j == inputArray.size() - 1) {
 
-				partialDividend = divisionArrayList.get(j);
-				Integer remainder = 0;
+				partialDividend = inputArray.get(j);
+				int remainder = 0;
 				remainder = partialDividend - multiplication;
-				int spaces = index + 1 - integerLength(remainder);
+				int spaces = index + 1 - intLength(remainder);
 				if (remainder > 0)
 					spaces++;
-				result = addSymbols(result, " ", spaces);
-				result.append(remainder.toString());
+				result = addChars(result, " ", spaces);
+				result.append(remainder);
 			} else {
 				index++;
 
@@ -87,7 +87,7 @@ public class DivisionFormatter {
 		return result.toString();
 	}
 
-	private StringBuilder addSymbols(StringBuilder string, String symbol, int count) {
+	private StringBuilder addChars(StringBuilder string, String symbol, int count) {
 		StringBuilder result = string;
 		for (int i = 0; i < count; i++) {
 			result.append(symbol);
@@ -95,13 +95,12 @@ public class DivisionFormatter {
 		return result;
 	}
 
-	private Integer integerLength(Integer sourceInteger) {
-		if (sourceInteger == 0) {
+	private int intLength(int sourceInt) {
+		if (sourceInt == 0) {
 			return 0;
 		} else {
-			return (int) (Math.log10(sourceInteger) + 1);
+			return (int) (Math.log10(sourceInt) + 1);
 		}
-
 	}
 
 }
