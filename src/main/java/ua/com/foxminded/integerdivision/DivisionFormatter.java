@@ -15,10 +15,9 @@ public class DivisionFormatter {
 		StringBuilder result = new StringBuilder(createHeader(inputArray, dividend, divider));
 
 		int index = intLength(inputArray.get(0));
-		int j = 1;
-		while (j < inputArray.size()) {
+
+		for (int j = 1; j < inputArray.size(); j++) {
 			int partialDividend = inputArray.get(j);
-			int divisionDigit = partialDividend / divider;
 			if ((partialDividend < divider) && (index == intLength(dividend) - 1)) {
 				result = addChars(result, " ", index + 2 - intLength(partialDividend));
 				result.append(String.valueOf(partialDividend));
@@ -29,17 +28,15 @@ public class DivisionFormatter {
 				result.append(regularIteration(partialDividend, divider, index));
 			}
 			if (j == inputArray.size() - 1) {
-				result.append(addLastRemainder(partialDividend, divider, index));
+				result.append(lastRemainderString(partialDividend, divider, index));
 			} else {
 				index++;
-
 			}
-			j++;
 		}
 		return result.toString();
 	}
 
-	private String addLastRemainder(int partialDividend, int divider, int index) {
+	private String lastRemainderString(int partialDividend, int divider, int index) {
 		StringBuilder result = new StringBuilder();
 		int divisionDigit = partialDividend / divider;
 		int multiplication = divider * divisionDigit;
