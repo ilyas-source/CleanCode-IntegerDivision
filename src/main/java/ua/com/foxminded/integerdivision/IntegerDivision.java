@@ -6,6 +6,11 @@ public class IntegerDivision {
 
 	public ArrayList<ArrayList<Integer>> divide(Integer dividend, Integer divider) {
 
+		if (divider == 0) {
+			System.out.println("Division by zero, terminating.");
+			System.exit(0);
+		}
+
 		ArrayList<Integer> iterationArrayList = new ArrayList<>();
 		ArrayList<ArrayList<Integer>> outputArray = new ArrayList<ArrayList<Integer>>();
 		dividend = Math.abs(dividend);
@@ -15,11 +20,6 @@ public class IntegerDivision {
 			iterationArrayList.add(0);
 			outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
 			return outputArray;
-		}
-
-		if (divider == 0) {
-			System.out.println("Division by zero, terminating.");
-			System.exit(0);
 		}
 
 		int divisionDigit = 0;

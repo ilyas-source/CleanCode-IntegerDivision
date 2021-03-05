@@ -7,13 +7,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		int dividend;
-		int divider;
 
 		System.out.println("Enter the dividend:");
-		dividend = scanner.nextInt();
+		int dividend = scanner.nextInt();
 		System.out.println("Enter the divider:");
-		divider = scanner.nextInt();
+		int divider = scanner.nextInt();
 
 		scanner.close();
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DivisionFormatter {
 
-	public static final String LS = System.lineSeparator();
+	public static final String CR = System.lineSeparator();
 
 	public String format(ArrayList<ArrayList<Integer>> divisionArrayList, Integer dividend, Integer divider) {
 		StringBuilder result = new StringBuilder();
@@ -13,12 +13,12 @@ public class DivisionFormatter {
 		Integer divisionDigit = divisionArrayList.get(0).get(1);
 
 		if ((divisionArrayList.size() == 1) && (partialDividend + divisionDigit == 0)) {
-			result.append(dividend.toString() + "|" + divider.toString() + LS);
-			result = addSpaces(result, integerLength(dividend));
+			result.append(dividend.toString() + "|" + divider.toString() + CR);
+			result = addSymbols(result, " ", integerLength(dividend));
 			result.append("|");
-			result = addDashes(result, integerLength(divider));
-			result.append(LS);
-			result = addSpaces(result, integerLength(dividend));
+			result = addSymbols(result, "-", integerLength(divider));
+			result.append(CR);
+			result = addSymbols(result, " ", integerLength(dividend));
 			result.append("|0");
 			return result.toString();
 		}
@@ -27,20 +27,20 @@ public class DivisionFormatter {
 
 		Integer multiplication = divider * divisionDigit;
 
-		result.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + LS);
+		result.append("_" + Integer.toString(dividend) + "|" + Integer.toString(divider) + CR);
 		result.append(" " + multiplication.toString());
-		result = addSpaces(result, integerLength(dividend) - index - 1);
+		result = addSymbols(result, " ", integerLength(dividend) - index - 1);
 		result.append("|");
-		result = addDashes(result, divisionArrayList.size());
-		result.append(LS + " ");
-		result = addSpaces(result, index - integerLength(multiplication));
-		result = addDashes(result, multiplication.toString().length());
-		result = addSpaces(result, integerLength(dividend) - index - 1);
+		result = addSymbols(result, "-", divisionArrayList.size());
+		result.append(CR + " ");
+		result = addSymbols(result, " ", index - integerLength(multiplication));
+		result = addSymbols(result, "-", multiplication.toString().length());
+		result = addSymbols(result, " ", integerLength(dividend) - index - 1);
 		result.append("|");
 		for (int j = 0; j < divisionArrayList.size(); j++) {
 			result.append(divisionArrayList.get(j).get(1).toString());
 		}
-		result.append(LS);
+		result.append(CR);
 		index++;
 
 		int j = 1;
@@ -49,7 +49,7 @@ public class DivisionFormatter {
 			divisionDigit = divisionArrayList.get(j).get(1);
 
 			if ((partialDividend < divider) && (index == integerLength(dividend) - 1)) {
-				result = addSpaces(result, index + 2 - integerLength(partialDividend));
+				result = addSymbols(result, " ", index + 2 - integerLength(partialDividend));
 				result.append(partialDividend.toString());
 				break;
 			}
@@ -57,15 +57,15 @@ public class DivisionFormatter {
 			if (partialDividend + divisionDigit > 0) {
 
 				int spaces = index + 1 - integerLength(partialDividend);
-				result = addSpaces(result, spaces);
-				result.append("_" + partialDividend.toString() + LS);
+				result = addSymbols(result, " ", spaces);
+				result.append("_" + partialDividend.toString() + CR);
 				multiplication = divider * divisionArrayList.get(j).get(1);
 				spaces = index + 2 - integerLength(multiplication);
-				result = addSpaces(result, spaces);
-				result.append(multiplication.toString() + LS);
-				result = addSpaces(result, spaces);
-				result = addDashes(result, multiplication.toString().length());
-				result.append(LS);
+				result = addSymbols(result, " ", spaces);
+				result.append(multiplication.toString() + CR);
+				result = addSymbols(result, " ", spaces);
+				result = addSymbols(result, "-", multiplication.toString().length());
+				result.append(CR);
 			}
 			if (j == divisionArrayList.size() - 1) {
 
@@ -75,7 +75,7 @@ public class DivisionFormatter {
 				int spaces = index + 1 - integerLength(remainder);
 				if (remainder > 0)
 					spaces++;
-				result = addSpaces(result, spaces);
+				result = addSymbols(result, " ", spaces);
 				result.append(remainder.toString());
 			} else {
 				index++;
@@ -86,18 +86,10 @@ public class DivisionFormatter {
 		return result.toString();
 	}
 
-	private StringBuilder addSpaces(StringBuilder string, int count) {
+	private StringBuilder addSymbols(StringBuilder string, String symbol, int count) {
 		StringBuilder result = string;
 		for (int i = 0; i < count; i++) {
-			result.append(" ");
-		}
-		return result;
-	}
-
-	private StringBuilder addDashes(StringBuilder string, int count) {
-		StringBuilder result = string;
-		for (int i = 0; i < count; i++) {
-			result.append("-");
+			result.append(symbol);
 		}
 		return result;
 	}
