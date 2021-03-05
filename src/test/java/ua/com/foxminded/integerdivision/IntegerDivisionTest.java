@@ -18,7 +18,7 @@ public class IntegerDivisionTest {
 	public void given123456And12345_onIntegerDivision_thenGetString() {
 		Integer dividend = 12346;
 		Integer divider = 12345;
-		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.divide(dividend, divider);
+		ArrayList<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
 
 		String outputString = formatter.format(divisionArrayList, dividend, divider);
 		String testString = "_12346|12345" + LS + " 12345|-" + LS + " -----|1" + LS;
@@ -29,7 +29,7 @@ public class IntegerDivisionTest {
 	public void given4050225And405_onIntegerDivision_thenGetString() {
 		Integer dividend = 4050225;
 		Integer divider = 45;
-		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.divide(dividend, divider);
+		ArrayList<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
 
 		String outputString = formatter.format(divisionArrayList, dividend, divider);
 		String testString = "_4050225|45" + LS + " 405    |-----" + LS + " ---    |90005" + LS;
@@ -41,7 +41,7 @@ public class IntegerDivisionTest {
 	public void given78945And4_onIntegerDivision_thenGetString() {
 		Integer dividend = 78945;
 		Integer divider = 4;
-		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.divide(dividend, divider);
+		ArrayList<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
 
 		String outputString = formatter.format(divisionArrayList, dividend, divider);
 		String testString = "_78945|4" + LS + " 4    |-----" + LS + " -    |19736";
@@ -55,7 +55,7 @@ public class IntegerDivisionTest {
 	public void given234And23456_onIntegerDivision_thenGetString() {
 		Integer dividend = 234;
 		Integer divider = 23456;
-		ArrayList<ArrayList<Integer>> divisionArrayList = integerDivision.divide(dividend, divider);
+		ArrayList<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
 		String outputString = formatter.format(divisionArrayList, dividend, divider);
 		String testString = "234|23456" + LS + "   |-----" + LS + "   |0";
 		TestCase.assertEquals(testString, outputString);

@@ -4,15 +4,13 @@ import java.util.ArrayList;
 
 public class IntegerDivision {
 
-	public ArrayList<ArrayList<Integer>> divide(Integer dividend, Integer divider) throws ArithmeticException {
+	public ArrayList<Integer> divide(Integer dividend, Integer divider) throws ArithmeticException {
 
-		ArrayList<Integer> iterationArrayList = new ArrayList<>();
-		ArrayList<ArrayList<Integer>> outputArray = new ArrayList<ArrayList<Integer>>();
+		ArrayList<Integer> outputArray = new ArrayList<Integer>();
 		dividend = Math.abs(dividend);
 
 		if (dividend < divider) {
-			iterationArrayList.add(0);
-			outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
+			outputArray.add(0);
 			return outputArray;
 		}
 
@@ -21,11 +19,8 @@ public class IntegerDivision {
 
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
-			iterationArrayList.add(partialDividend);
-			outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
+			outputArray.add(partialDividend);
 			partialDividend = partialDividend - divider * divisionDigit;
-
-			iterationArrayList.clear();
 		}
 
 		int startPosition = 1;
@@ -37,17 +32,13 @@ public class IntegerDivision {
 
 			if (partialDividend < divider) {
 				if (!outputArray.isEmpty()) {
-					iterationArrayList.add(0);
-					outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
-					iterationArrayList.clear();
+					outputArray.add(0);
 				}
 			} else {
 				divisionDigit = partialDividend / divider;
-				iterationArrayList.add(partialDividend);
-				outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
+				outputArray.add(partialDividend);
 				partialDividend = partialDividend - divider * divisionDigit;
 				remainder = partialDividend;
-				iterationArrayList.clear();
 				startPosition = index + 1;
 			}
 		}

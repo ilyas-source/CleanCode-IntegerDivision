@@ -6,10 +6,10 @@ public class DivisionFormatter {
 
 	public static final String CR = System.lineSeparator();
 
-	public String format(ArrayList<ArrayList<Integer>> divisionArrayList, Integer dividend, Integer divider) {
+	public String format(ArrayList<Integer> divisionArrayList, Integer dividend, Integer divider) {
 		StringBuilder result = new StringBuilder();
 
-		Integer partialDividend = divisionArrayList.get(0).get(0);
+		Integer partialDividend = divisionArrayList.get(0);
 		Integer divisionDigit = partialDividend / divider;
 
 		if ((divisionArrayList.size() == 1) && (partialDividend + divisionDigit == 0)) {
@@ -38,7 +38,7 @@ public class DivisionFormatter {
 		result = addSymbols(result, " ", integerLength(dividend) - index - 1);
 		result.append("|");
 		for (int j = 0; j < divisionArrayList.size(); j++) {
-			divisionDigit = divisionArrayList.get(j).get(0) / divider;
+			divisionDigit = divisionArrayList.get(j) / divider;
 			result.append(divisionDigit.toString());
 		}
 		result.append(CR);
@@ -46,7 +46,7 @@ public class DivisionFormatter {
 
 		int j = 1;
 		while (j < divisionArrayList.size()) {
-			partialDividend = divisionArrayList.get(j).get(0);
+			partialDividend = divisionArrayList.get(j);
 			divisionDigit = partialDividend / divider;
 
 			if ((partialDividend < divider) && (index == integerLength(dividend) - 1)) {
@@ -70,7 +70,7 @@ public class DivisionFormatter {
 			}
 			if (j == divisionArrayList.size() - 1) {
 
-				partialDividend = divisionArrayList.get(j).get(0);
+				partialDividend = divisionArrayList.get(j);
 				Integer remainder = 0;
 				remainder = partialDividend - multiplication;
 				int spaces = index + 1 - integerLength(remainder);

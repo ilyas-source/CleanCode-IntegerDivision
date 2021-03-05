@@ -17,7 +17,7 @@ public class Main {
 
 		IntegerDivision integerDivision = new IntegerDivision();
 		try {
-			ArrayList<ArrayList<Integer>> result = integerDivision.divide(dividend, divider);
+			ArrayList<Integer> result = integerDivision.divide(dividend, divider);
 			DivisionFormatter formatter = new DivisionFormatter();
 			System.out.println(formatter.format(result, dividend, divider));
 		} catch (Exception arithmeticException) {
