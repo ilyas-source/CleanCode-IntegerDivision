@@ -16,12 +16,14 @@ public class Main {
 		scanner.close();
 
 		IntegerDivision integerDivision = new IntegerDivision();
+		try {
+			ArrayList<ArrayList<Integer>> result = integerDivision.divide(dividend, divider);
+			DivisionFormatter formatter = new DivisionFormatter();
+			System.out.println(formatter.format(result, dividend, divider));
+		} catch (Exception arithmeticException) {
+			System.out.println("Division by zero.");
+		}
 
-		ArrayList<ArrayList<Integer>> result = integerDivision.divide(dividend, divider);
-
-		DivisionFormatter formatter = new DivisionFormatter();
-
-		System.out.println(formatter.format(result, dividend, divider));
 	}
 
 }

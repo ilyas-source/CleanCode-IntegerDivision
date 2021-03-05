@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 public class IntegerDivision {
 
-	public ArrayList<ArrayList<Integer>> divide(Integer dividend, Integer divider) {
-
-		if (divider == 0) {
-			System.out.println("Division by zero, terminating.");
-			System.exit(0);
-		}
+	public ArrayList<ArrayList<Integer>> divide(Integer dividend, Integer divider) throws ArithmeticException {
 
 		ArrayList<Integer> iterationArrayList = new ArrayList<>();
 		ArrayList<ArrayList<Integer>> outputArray = new ArrayList<ArrayList<Integer>>();
