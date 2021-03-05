@@ -12,7 +12,6 @@ public class IntegerDivision {
 
 		if (dividend < divider) {
 			iterationArrayList.add(0);
-			iterationArrayList.add(0);
 			outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
 			return outputArray;
 		}
@@ -23,7 +22,6 @@ public class IntegerDivision {
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
 			iterationArrayList.add(partialDividend);
-			iterationArrayList.add(divisionDigit);
 			outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
 			partialDividend = partialDividend - divider * divisionDigit;
 
@@ -40,14 +38,12 @@ public class IntegerDivision {
 			if (partialDividend < divider) {
 				if (!outputArray.isEmpty()) {
 					iterationArrayList.add(0);
-					iterationArrayList.add(0);
 					outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
 					iterationArrayList.clear();
 				}
 			} else {
 				divisionDigit = partialDividend / divider;
 				iterationArrayList.add(partialDividend);
-				iterationArrayList.add(divisionDigit);
 				outputArray.add((ArrayList<Integer>) iterationArrayList.clone());
 				partialDividend = partialDividend - divider * divisionDigit;
 				remainder = partialDividend;
@@ -55,7 +51,6 @@ public class IntegerDivision {
 				startPosition = index + 1;
 			}
 		}
-
 		return outputArray;
 
 	}

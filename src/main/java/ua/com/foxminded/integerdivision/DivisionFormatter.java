@@ -10,7 +10,7 @@ public class DivisionFormatter {
 		StringBuilder result = new StringBuilder();
 
 		Integer partialDividend = divisionArrayList.get(0).get(0);
-		Integer divisionDigit = divisionArrayList.get(0).get(1);
+		Integer divisionDigit = partialDividend / divider;
 
 		if ((divisionArrayList.size() == 1) && (partialDividend + divisionDigit == 0)) {
 			result.append(dividend.toString() + "|" + divider.toString() + CR);
@@ -38,7 +38,8 @@ public class DivisionFormatter {
 		result = addSymbols(result, " ", integerLength(dividend) - index - 1);
 		result.append("|");
 		for (int j = 0; j < divisionArrayList.size(); j++) {
-			result.append(divisionArrayList.get(j).get(1).toString());
+			divisionDigit = divisionArrayList.get(j).get(0) / divider;
+			result.append(divisionDigit.toString());
 		}
 		result.append(CR);
 		index++;
@@ -46,7 +47,7 @@ public class DivisionFormatter {
 		int j = 1;
 		while (j < divisionArrayList.size()) {
 			partialDividend = divisionArrayList.get(j).get(0);
-			divisionDigit = divisionArrayList.get(j).get(1);
+			divisionDigit = partialDividend / divider;
 
 			if ((partialDividend < divider) && (index == integerLength(dividend) - 1)) {
 				result = addSymbols(result, " ", index + 2 - integerLength(partialDividend));
@@ -59,7 +60,7 @@ public class DivisionFormatter {
 				int spaces = index + 1 - integerLength(partialDividend);
 				result = addSymbols(result, " ", spaces);
 				result.append("_" + partialDividend.toString() + CR);
-				multiplication = divider * divisionArrayList.get(j).get(1);
+				multiplication = divider * divisionDigit;
 				spaces = index + 2 - integerLength(multiplication);
 				result = addSymbols(result, " ", spaces);
 				result.append(multiplication.toString() + CR);
