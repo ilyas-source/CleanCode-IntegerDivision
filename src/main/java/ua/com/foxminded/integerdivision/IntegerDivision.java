@@ -1,9 +1,5 @@
 package ua.com.foxminded.integerdivision;
 
-import java.util.ArrayList;
-
-import java.util.List;
-
 public class IntegerDivision {
 
 	public DivisionResult divide(int dividend, int divider) throws ArithmeticException {
@@ -13,10 +9,15 @@ public class IntegerDivision {
 		}
 
 		DivisionResult divisionResult = new DivisionResult();
+
 		dividend = Math.abs(dividend);
 
+		divisionResult.setDividend(dividend);
+		divisionResult.setDivider(divider);
+
 		if (dividend < divider) {
-			divisionResult.getPartialDividends().add(0);
+			divisionResult.addPartialDividend(0);
+			divisionResult.addDivisionDigit(0);
 			return divisionResult;
 		}
 
@@ -25,7 +26,8 @@ public class IntegerDivision {
 
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
-			divisionResult.getPartialDividends().add(partialDividend);
+			divisionResult.addPartialDividend(partialDividend);
+			divisionResult.addDivisionDigit(divisionDigit);
 			partialDividend = partialDividend - divider * divisionDigit;
 		}
 
@@ -38,11 +40,13 @@ public class IntegerDivision {
 
 			if (partialDividend < divider) {
 				if (!divisionResult.getPartialDividends().isEmpty()) {
-					divisionResult.getPartialDividends().add(0);
+					divisionResult.addPartialDividend(0);
+					divisionResult.addDivisionDigit(0);
 				}
 			} else {
 				divisionDigit = partialDividend / divider;
-				divisionResult.getPartialDividends().add(partialDividend);
+				divisionResult.addPartialDividend(partialDividend);
+				divisionResult.addDivisionDigit(divisionDigit);
 				partialDividend = partialDividend - divider * divisionDigit;
 				remainder = partialDividend;
 				startPosition = index + 1;
