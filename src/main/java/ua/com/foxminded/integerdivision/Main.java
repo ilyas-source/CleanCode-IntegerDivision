@@ -1,6 +1,5 @@
 package ua.com.foxminded.integerdivision;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,9 +17,9 @@ public class Main {
 
 		IntegerDivision integerDivision = new IntegerDivision();
 
-		List<Integer> result = integerDivision.divide(dividend, divider);
+		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 		DivisionFormatter formatter = new DivisionFormatter();
-		System.out.println(formatter.format(result, dividend, divider));
+		System.out.println(formatter.format(divisionResult, dividend, divider));
 
 	}
 

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 import ua.com.foxminded.integerdivision.DivisionFormatter;
+import ua.com.foxminded.integerdivision.DivisionResult;
 import ua.com.foxminded.integerdivision.IntegerDivision;
 
 public class IntegerDivisionTest {
@@ -25,9 +26,9 @@ public class IntegerDivisionTest {
 	public void given123456And12345_onIntegerDivision_thenGetString() {
 		int dividend = 12346;
 		int divider = 12345;
-		List<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
+		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 
-		String outputString = formatter.format(divisionArrayList, dividend, divider);
+		String outputString = formatter.format(divisionResult, dividend, divider);
 		String testString = "_12346|12345" + CR + " 12345|-" + CR + " -----|1" + CR;
 		TestCase.assertEquals(testString, outputString);
 	}
@@ -36,9 +37,9 @@ public class IntegerDivisionTest {
 	public void given4050225And405_onIntegerDivision_thenGetString() {
 		int dividend = 4050225;
 		int divider = 45;
-		List<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
+		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 
-		String outputString = formatter.format(divisionArrayList, dividend, divider);
+		String outputString = formatter.format(divisionResult, dividend, divider);
 		String testString = "_4050225|45" + CR + " 405    |-----" + CR + " ---    |90005" + CR;
 		testString += "    _225" + CR + "     225" + CR + "     ---" + CR + "       0";
 		TestCase.assertEquals(testString, outputString);
@@ -48,9 +49,9 @@ public class IntegerDivisionTest {
 	public void given78945And4_onIntegerDivision_thenGetString() {
 		int dividend = 78945;
 		int divider = 4;
-		List<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
+		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 
-		String outputString = formatter.format(divisionArrayList, dividend, divider);
+		String outputString = formatter.format(divisionResult, dividend, divider);
 		String testString = "_78945|4" + CR + " 4    |-----" + CR + " -    |19736";
 		testString += CR + "_38" + CR + " 36" + CR + " --" + CR + " _29" + CR + "  28" + CR + "  --";
 		testString += CR + "  _14" + CR + "   12" + CR + "   --" + CR + "   _25" + CR + "    24" + CR + "    --" + CR
@@ -62,8 +63,8 @@ public class IntegerDivisionTest {
 	public void given234And23456_onIntegerDivision_thenGetString() {
 		int dividend = 234;
 		int divider = 23456;
-		List<Integer> divisionArrayList = integerDivision.divide(dividend, divider);
-		String outputString = formatter.format(divisionArrayList, dividend, divider);
+		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
+		String outputString = formatter.format(divisionResult, dividend, divider);
 		String testString = "234|23456" + CR + "   |-----" + CR + "   |0";
 		TestCase.assertEquals(testString, outputString);
 	}

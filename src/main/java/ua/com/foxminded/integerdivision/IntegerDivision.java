@@ -6,18 +6,18 @@ import java.util.List;
 
 public class IntegerDivision {
 
-	public List<Integer> divide(int dividend, int divider) throws ArithmeticException {
+	public DivisionResult divide(int dividend, int divider) throws ArithmeticException {
 
 		if (divider == 0) {
 			throw new ArithmeticException("Division by zero.");
 		}
 
-		List<Integer> divisionData = new ArrayList<>();
+		DivisionResult divisionResult = new DivisionResult();
 		dividend = Math.abs(dividend);
 
 		if (dividend < divider) {
-			divisionData.add(0);
-			return divisionData;
+			divisionResult.getPartialDividends().add(0);
+			return divisionResult;
 		}
 
 		int divisionDigit = 0;
@@ -25,7 +25,7 @@ public class IntegerDivision {
 
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
-			divisionData.add(partialDividend);
+			divisionResult.getPartialDividends().add(partialDividend);
 			partialDividend = partialDividend - divider * divisionDigit;
 		}
 
@@ -37,18 +37,18 @@ public class IntegerDivision {
 			partialDividend = (int) (subInt + remainder * Math.pow(10, index - startPosition + 1));
 
 			if (partialDividend < divider) {
-				if (!divisionData.isEmpty()) {
-					divisionData.add(0);
+				if (!divisionResult.getPartialDividends().isEmpty()) {
+					divisionResult.getPartialDividends().add(0);
 				}
 			} else {
 				divisionDigit = partialDividend / divider;
-				divisionData.add(partialDividend);
+				divisionResult.getPartialDividends().add(partialDividend);
 				partialDividend = partialDividend - divider * divisionDigit;
 				remainder = partialDividend;
 				startPosition = index + 1;
 			}
 		}
-		return divisionData;
+		return divisionResult;
 
 	}
 
