@@ -5,7 +5,7 @@ public class IntegerDivision {
 	public DivisionResult divide(int dividend, int divider) throws ArithmeticException {
 
 		if (divider == 0) {
-			throw new ArithmeticException("Division by zero.");
+			throw new ArithmeticException("Division by zero");
 		}
 
 		DivisionResult divisionResult = new DivisionResult();

@@ -7,18 +7,22 @@ public class DivisionFormatter {
 	public static final String CR = System.lineSeparator();
 	IntegerDivision integerDivision = new IntegerDivision();
 
-	public String format(DivisionResult divisionResult, int dividend, int divider) {
+	public String format(DivisionResult divisionResult) {
 
-		if ((divisionResult.getPartialDividends().size() == 1) && (divisionResult.getPartialDividends().get(0) == 0)) {
+		int divider = divisionResult.getDivider();
+		int dividend = divisionResult.getDividend();
+		int partialDividend = divisionResult.getPartialDividends().get(0);
+
+		if ((divisionResult.getPartialDividends().size() == 1) && (partialDividend == 0)) {
 			return createSimpleDivision(dividend, divider);
 		}
 
-		StringBuilder result = new StringBuilder(createHeader(divisionResult, dividend, divider));
+		StringBuilder result = new StringBuilder(createHeader(divisionResult));
 
-		int index = integerDivision.getIntLength(divisionResult.getPartialDividends().get(0));
+		int index = integerDivision.getIntLength(partialDividend);
 
 		for (int j = 1; j < divisionResult.getPartialDividends().size(); j++) {
-			int partialDividend = divisionResult.getPartialDividends().get(j);
+			partialDividend = divisionResult.getPartialDividends().get(j);
 			if ((partialDividend < divider) && (index == integerDivision.getIntLength(dividend) - 1)) {
 				result = addChars(result, " ", index + 2 - integerDivision.getIntLength(partialDividend));
 				result.append(String.valueOf(partialDividend));
@@ -68,25 +72,25 @@ public class DivisionFormatter {
 
 	}
 
-	private String createHeader(DivisionResult divisionResult, int dividend, int divider) {
+	private String createHeader(DivisionResult divisionResult) {
 		StringBuilder result = new StringBuilder();
 
-		int divisionDigit = divisionResult.getPartialDividends().get(0) / divider;
-		int multiplication = divider * divisionDigit;
+		int divisionDigit = divisionResult.getPartialDividends().get(0) / divisionResult.getDivider();
+		int multiplication = divisionResult.getDivider() * divisionDigit;
 		int index = integerDivision.getIntLength(divisionResult.getPartialDividends().get(0)) - 1;
 
-		result.append("_" + dividend + "|" + divider + CR);
+		result.append("_" + divisionResult.getDividend() + "|" + divisionResult.getDivider() + CR);
 		result.append(" " + multiplication);
-		result = addChars(result, " ", integerDivision.getIntLength(dividend) - index - 1);
+		result = addChars(result, " ", integerDivision.getIntLength(divisionResult.getDividend()) - index - 1);
 		result.append("|");
 		result = addChars(result, "-", divisionResult.getPartialDividends().size());
 		result.append(CR + " ");
 		result = addChars(result, " ", index - integerDivision.getIntLength(multiplication));
 		result = addChars(result, "-", String.valueOf(multiplication).length());
-		result = addChars(result, " ", integerDivision.getIntLength(dividend) - index - 1);
+		result = addChars(result, " ", integerDivision.getIntLength(divisionResult.getDividend()) - index - 1);
 		result.append("|");
 		for (int j = 0; j < divisionResult.getPartialDividends().size(); j++) {
-			divisionDigit = divisionResult.getPartialDividends().get(j) / divider;
+			divisionDigit = divisionResult.getPartialDividends().get(j) / divisionResult.getDivider();
 			result.append(String.valueOf(divisionDigit));
 		}
 		result.append(CR);
@@ -114,13 +118,4 @@ public class DivisionFormatter {
 		}
 		return result;
 	}
-
-//	private int getIntLength(int sourceInt) {
-//		if (sourceInt == 0) {
-//			return 0;
-//		} else {
-//			return (int) (Math.log10(sourceInt) + 1);
-//		}
-//	}
-
 }

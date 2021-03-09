@@ -19,7 +19,7 @@ public class Main {
 
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 		DivisionFormatter formatter = new DivisionFormatter();
-		System.out.println(formatter.format(divisionResult, dividend, divider));
+		System.out.println(formatter.format(divisionResult));
 
 	}
 
