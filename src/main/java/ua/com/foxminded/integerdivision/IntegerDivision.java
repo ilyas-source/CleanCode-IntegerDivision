@@ -2,20 +2,22 @@ package ua.com.foxminded.integerdivision;
 
 import java.util.ArrayList;
 
+import java.util.List;
+
 public class IntegerDivision {
 
-	public ArrayList<Integer> divide(int dividend, int divider) throws ArithmeticException {
+	public List<Integer> divide(int dividend, int divider) throws ArithmeticException {
 
 		if (divider == 0) {
 			throw new ArithmeticException("Division by zero.");
 		}
 
-		ArrayList<Integer> outputArray = new ArrayList<>();
+		List<Integer> divisionData = new ArrayList<>();
 		dividend = Math.abs(dividend);
 
 		if (dividend < divider) {
-			outputArray.add(0);
-			return outputArray;
+			divisionData.add(0);
+			return divisionData;
 		}
 
 		int divisionDigit = 0;
@@ -23,7 +25,7 @@ public class IntegerDivision {
 
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
-			outputArray.add(partialDividend);
+			divisionData.add(partialDividend);
 			partialDividend = partialDividend - divider * divisionDigit;
 		}
 
@@ -35,18 +37,18 @@ public class IntegerDivision {
 			partialDividend = (int) (subInt + remainder * Math.pow(10, index - startPosition + 1));
 
 			if (partialDividend < divider) {
-				if (!outputArray.isEmpty()) {
-					outputArray.add(0);
+				if (!divisionData.isEmpty()) {
+					divisionData.add(0);
 				}
 			} else {
 				divisionDigit = partialDividend / divider;
-				outputArray.add(partialDividend);
+				divisionData.add(partialDividend);
 				partialDividend = partialDividend - divider * divisionDigit;
 				remainder = partialDividend;
 				startPosition = index + 1;
 			}
 		}
-		return outputArray;
+		return divisionData;
 
 	}
 
@@ -73,7 +75,7 @@ public class IntegerDivision {
 		return result;
 	}
 
-	private int getIntLength(int sourceInt) {
+	public int getIntLength(int sourceInt) {
 		if (sourceInt == 0) {
 			return 0;
 		} else {
