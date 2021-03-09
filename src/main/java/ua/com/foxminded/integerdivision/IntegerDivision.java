@@ -6,6 +6,10 @@ public class IntegerDivision {
 
 	public ArrayList<Integer> divide(int dividend, int divider) throws ArithmeticException {
 
+		if (divider == 0) {
+			throw new ArithmeticException("Division by zero.");
+		}
+
 		ArrayList<Integer> outputArray = new ArrayList<>();
 		dividend = Math.abs(dividend);
 
@@ -26,7 +30,7 @@ public class IntegerDivision {
 		int startPosition = 1;
 		int remainder = partialDividend;
 
-		for (int index = 1; index < intLength(dividend); index++) {
+		for (int index = 1; index < getIntLength(dividend); index++) {
 			int subInt = subInt(dividend, startPosition, index);
 			partialDividend = (int) (subInt + remainder * Math.pow(10, index - startPosition + 1));
 
@@ -47,15 +51,15 @@ public class IntegerDivision {
 	}
 
 	private Integer getNthDigit(int sourceInt, int position) {
-		int length = intLength(sourceInt);
+		int length = getIntLength(sourceInt);
 
 		return sourceInt / (int) Math.pow(10, length - position) % 10;
 	}
 
 	public int subInt(int sourceInt, int startPosition, int endPosition) {
 
-		int[] digits = new int[intLength(sourceInt)];
-		for (int i = 0; i < intLength(sourceInt); i++) {
+		int[] digits = new int[getIntLength(sourceInt)];
+		for (int i = 0; i < getIntLength(sourceInt); i++) {
 			digits[i] = getNthDigit(sourceInt, i + 1);
 		}
 
@@ -69,7 +73,7 @@ public class IntegerDivision {
 		return result;
 	}
 
-	private int intLength(int sourceInt) {
+	private int getIntLength(int sourceInt) {
 		if (sourceInt == 0) {
 			return 0;
 		} else {

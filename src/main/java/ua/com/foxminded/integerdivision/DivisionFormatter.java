@@ -9,26 +9,26 @@ public class DivisionFormatter {
 	public String format(ArrayList<Integer> inputArray, int dividend, int divider) {
 
 		if ((inputArray.size() == 1) && (inputArray.get(0) == 0)) {
-			return simpleDivision(dividend, divider);
+			return createSimpleDivision(dividend, divider);
 		}
 
 		StringBuilder result = new StringBuilder(createHeader(inputArray, dividend, divider));
 
-		int index = intLength(inputArray.get(0));
+		int index = getIntLength(inputArray.get(0));
 
 		for (int j = 1; j < inputArray.size(); j++) {
 			int partialDividend = inputArray.get(j);
-			if ((partialDividend < divider) && (index == intLength(dividend) - 1)) {
-				result = addChars(result, " ", index + 2 - intLength(partialDividend));
+			if ((partialDividend < divider) && (index == getIntLength(dividend) - 1)) {
+				result = addChars(result, " ", index + 2 - getIntLength(partialDividend));
 				result.append(String.valueOf(partialDividend));
 				break;
 			}
 
 			if (partialDividend > 0) {
-				result.append(regularIteration(partialDividend, divider, index));
+				result.append(createRegularIteration(partialDividend, divider, index));
 			}
 			if (j == inputArray.size() - 1) {
-				result.append(lastRemainderString(partialDividend, divider, index));
+				result.append(createLastRemainderString(partialDividend, divider, index));
 			} else {
 				index++;
 			}
@@ -36,12 +36,12 @@ public class DivisionFormatter {
 		return result.toString();
 	}
 
-	private String lastRemainderString(int partialDividend, int divider, int index) {
+	private String createLastRemainderString(int partialDividend, int divider, int index) {
 		StringBuilder result = new StringBuilder();
 		int divisionDigit = partialDividend / divider;
 		int multiplication = divider * divisionDigit;
 		int remainder = partialDividend - multiplication;
-		int spaces = index + 1 - intLength(remainder);
+		int spaces = index + 1 - getIntLength(remainder);
 		if (remainder > 0)
 			spaces++;
 		result = addChars(result, " ", spaces);
@@ -49,15 +49,15 @@ public class DivisionFormatter {
 		return result.toString();
 	}
 
-	private String regularIteration(int partialDividend, int divider, int index) {
+	private String createRegularIteration(int partialDividend, int divider, int index) {
 		StringBuilder result = new StringBuilder();
 		int divisionDigit = partialDividend / divider;
 
-		int spaces = index + 1 - intLength(partialDividend);
+		int spaces = index + 1 - getIntLength(partialDividend);
 		result = addChars(result, " ", spaces);
 		result.append("_" + partialDividend + CR);
 		int multiplication = divider * divisionDigit;
-		spaces = index + 2 - intLength(multiplication);
+		spaces = index + 2 - getIntLength(multiplication);
 		result = addChars(result, " ", spaces);
 		result.append(multiplication + CR);
 		result = addChars(result, " ", spaces);
@@ -72,17 +72,17 @@ public class DivisionFormatter {
 
 		int divisionDigit = inputArray.get(0) / divider;
 		int multiplication = divider * divisionDigit;
-		int index = intLength(inputArray.get(0)) - 1;
+		int index = getIntLength(inputArray.get(0)) - 1;
 
 		result.append("_" + dividend + "|" + divider + CR);
 		result.append(" " + multiplication);
-		result = addChars(result, " ", intLength(dividend) - index - 1);
+		result = addChars(result, " ", getIntLength(dividend) - index - 1);
 		result.append("|");
 		result = addChars(result, "-", inputArray.size());
 		result.append(CR + " ");
-		result = addChars(result, " ", index - intLength(multiplication));
+		result = addChars(result, " ", index - getIntLength(multiplication));
 		result = addChars(result, "-", String.valueOf(multiplication).length());
-		result = addChars(result, " ", intLength(dividend) - index - 1);
+		result = addChars(result, " ", getIntLength(dividend) - index - 1);
 		result.append("|");
 		for (int j = 0; j < inputArray.size(); j++) {
 			divisionDigit = inputArray.get(j) / divider;
@@ -93,14 +93,14 @@ public class DivisionFormatter {
 		return result.toString();
 	}
 
-	private String simpleDivision(int dividend, int divider) {
+	private String createSimpleDivision(int dividend, int divider) {
 		StringBuilder result = new StringBuilder();
 		result.append(String.valueOf(dividend) + "|" + String.valueOf(divider) + CR);
-		result = addChars(result, " ", intLength(dividend));
+		result = addChars(result, " ", getIntLength(dividend));
 		result.append("|");
-		result = addChars(result, "-", intLength(divider));
+		result = addChars(result, "-", getIntLength(divider));
 		result.append(CR);
-		result = addChars(result, " ", intLength(dividend));
+		result = addChars(result, " ", getIntLength(dividend));
 		result.append("|0");
 
 		return result.toString();
@@ -114,7 +114,7 @@ public class DivisionFormatter {
 		return result;
 	}
 
-	private int intLength(int sourceInt) {
+	private int getIntLength(int sourceInt) {
 		if (sourceInt == 0) {
 			return 0;
 		} else {
