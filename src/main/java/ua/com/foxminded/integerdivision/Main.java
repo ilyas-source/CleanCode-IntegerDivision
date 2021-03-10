@@ -8,10 +8,13 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 
-		System.out.println("Enter the dividend:");
-		int dividend = scanner.nextInt();
-		System.out.println("Enter the divider:");
-		int divider = scanner.nextInt();
+//		System.out.println("Enter the dividend:");
+//		int dividend = scanner.nextInt();
+//		System.out.println("Enter the divider:");
+//		int divider = scanner.nextInt();
+
+		int dividend = 12346;
+		int divider = 12345;
 
 		scanner.close();
 

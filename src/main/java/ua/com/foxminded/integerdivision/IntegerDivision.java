@@ -22,7 +22,7 @@ public class IntegerDivision {
 		}
 
 		int divisionDigit = 0;
-		int partialDividend = subInt(dividend, 0, 0);
+		int partialDividend = getSubInt(dividend, 0, 0);
 
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
@@ -35,8 +35,7 @@ public class IntegerDivision {
 		int remainder = partialDividend;
 
 		for (int index = 1; index < getIntLength(dividend); index++) {
-			int subInt = subInt(dividend, startPosition, index);
-			partialDividend = (int) (subInt + remainder * Math.pow(10, index - startPosition + 1));
+			partialDividend = partialDividend * 10 + getNthDigit(dividend, index + 1);
 
 			if (partialDividend < divider) {
 				if (!divisionResult.getPartialDividends().isEmpty()) {
@@ -52,6 +51,10 @@ public class IntegerDivision {
 				startPosition = index + 1;
 			}
 		}
+		int[] dividendDigits = new int[getIntLength(dividend)];
+		for (int index = 1; index < getIntLength(dividend); index++) {
+			dividendDigits[index] = getNthDigit(dividend, index);
+		}
 		return divisionResult;
 
 	}
@@ -62,7 +65,7 @@ public class IntegerDivision {
 		return sourceInt / (int) Math.pow(10, length - position) % 10;
 	}
 
-	public int subInt(int sourceInt, int startPosition, int endPosition) {
+	public int getSubInt(int sourceInt, int startPosition, int endPosition) {
 
 		int[] digits = new int[getIntLength(sourceInt)];
 		for (int i = 0; i < getIntLength(sourceInt); i++) {

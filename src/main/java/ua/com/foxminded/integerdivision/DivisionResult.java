@@ -13,6 +13,10 @@ public class DivisionResult {
 		return partialDividends;
 	}
 
+	public List<Integer> getDivisionDigits() {
+		return divisionDigits;
+	}
+
 	public void addPartialDividend(int partialDividend) {
 		this.partialDividends.add(partialDividend);
 	}

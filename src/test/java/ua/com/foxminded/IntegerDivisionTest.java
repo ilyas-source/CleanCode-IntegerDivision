@@ -23,7 +23,7 @@ public class IntegerDivisionTest {
 	private static final String CR = System.lineSeparator();
 
 	@Test
-	public void given123456And12345_onIntegerDivision_thenGetString() {
+	public void given12346And12345_onIntegerDivision_thenGetString() {
 		int dividend = 12346;
 		int divider = 12345;
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
