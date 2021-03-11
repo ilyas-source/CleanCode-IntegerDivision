@@ -25,7 +25,7 @@ public class DivisionFormatter {
 			partialDividend = divisionResult.getPartialDividend(j);
 
 			if (partialDividend > 0) {
-				result.append(createRegularIteration(partialDividend, divider, index));
+				result.append(createRegularStep(partialDividend, divider, index));
 			}
 			if (j == divisionResult.divisionSteps.size() - 1) {
 				result.append(createLastRemainderString(partialDividend, divider, index));
@@ -49,7 +49,7 @@ public class DivisionFormatter {
 		return result.toString();
 	}
 
-	private String createRegularIteration(int partialDividend, int divider, int index) {
+	private String createRegularStep(int partialDividend, int divider, int index) {
 		StringBuilder result = new StringBuilder();
 		int divisionDigit = partialDividend / divider;
 
@@ -100,7 +100,7 @@ public class DivisionFormatter {
 		int dividend = divisionResult.getDividend();
 		int divider = divisionResult.getDivider();
 
-		result.append(String.valueOf(dividend) + "|" + String.valueOf(divider) + CR);
+		result.append(dividend + "|" + divider + CR);
 		result.append(repeatChar(SPACE, numberUtils.getIntLength(dividend)));
 		result.append("|");
 		result.append(repeatChar(DASH, numberUtils.getIntLength(divider)));

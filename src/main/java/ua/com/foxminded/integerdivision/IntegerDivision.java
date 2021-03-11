@@ -5,6 +5,7 @@ public class IntegerDivision {
 	public DivisionResult divide(int dividend, int divider) {
 
 		NumberUtils numberUtils = new NumberUtils();
+		int divisionDigit = 0;
 
 		if (divider == 0) {
 			throw new ArithmeticException("Division by zero");
@@ -12,9 +13,7 @@ public class IntegerDivision {
 
 		DivisionResult divisionResult = new DivisionResult();
 		int division = dividend / divider;
-
 		dividend = Math.abs(dividend);
-
 		divisionResult.setDividend(dividend);
 		divisionResult.setDivider(divider);
 		divisionResult.setDivision(division);
@@ -24,37 +23,33 @@ public class IntegerDivision {
 			return divisionResult;
 		}
 
-		int divisionDigit = 0;
 		int partialDividend = numberUtils.getNthDigit(dividend, 1);
-
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
 			divisionResult.addDivisionStep(partialDividend, divisionDigit);
 			partialDividend = partialDividend - divider * divisionDigit;
 		}
 
-		int remainder = partialDividend;
+		int[] dividendDigits = new int[numberUtils.getIntLength(dividend)];
 
-		for (int index = 1; index < numberUtils.getIntLength(dividend); index++) {
-			partialDividend = partialDividend * 10 + numberUtils.getNthDigit(dividend, index + 1);
+		for (int i = 1; i < numberUtils.getIntLength(dividend); i++) {
+			dividendDigits[i] = numberUtils.getNthDigit(dividend, i + 1);
+			partialDividend = partialDividend * 10 + dividendDigits[i];
 
-			if (partialDividend < divider) {
-				if (!divisionResult.divisionSteps.isEmpty()) {
-					divisionResult.addDivisionStep(0, 0);
-				}
-			} else {
+			if (partialDividend > divider) {
 				divisionDigit = partialDividend / divider;
 				divisionResult.addDivisionStep(partialDividend, divisionDigit);
 				partialDividend = partialDividend - divider * divisionDigit;
-				remainder = partialDividend;
 			}
+
+			else {
+				if (!divisionResult.divisionSteps.isEmpty()) {
+					divisionResult.addDivisionStep(0, 0);
+				}
+			}
+
 		}
-		int[] dividendDigits = new int[numberUtils.getIntLength(dividend)];
-		for (int index = 1; index < numberUtils.getIntLength(dividend); index++) {
-			dividendDigits[index] = numberUtils.getNthDigit(dividend, index);
-		}
+
 		return divisionResult;
-
 	}
-
 }
