@@ -4,6 +4,8 @@ public class IntegerDivision {
 
 	public DivisionResult divide(int dividend, int divider) {
 
+		NumberUtils numberUtils = new NumberUtils();
+
 		if (divider == 0) {
 			throw new ArithmeticException("Division by zero");
 		}
@@ -23,7 +25,7 @@ public class IntegerDivision {
 		}
 
 		int divisionDigit = 0;
-		int partialDividend = getNthDigit(dividend, 1);
+		int partialDividend = numberUtils.getNthDigit(dividend, 1);
 
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
@@ -33,8 +35,8 @@ public class IntegerDivision {
 
 		int remainder = partialDividend;
 
-		for (int index = 1; index < getIntLength(dividend); index++) {
-			partialDividend = partialDividend * 10 + getNthDigit(dividend, index + 1);
+		for (int index = 1; index < numberUtils.getIntLength(dividend); index++) {
+			partialDividend = partialDividend * 10 + numberUtils.getNthDigit(dividend, index + 1);
 
 			if (partialDividend < divider) {
 				if (!divisionResult.divisionSteps.isEmpty()) {
@@ -47,43 +49,12 @@ public class IntegerDivision {
 				remainder = partialDividend;
 			}
 		}
-		int[] dividendDigits = new int[getIntLength(dividend)];
-		for (int index = 1; index < getIntLength(dividend); index++) {
-			dividendDigits[index] = getNthDigit(dividend, index);
+		int[] dividendDigits = new int[numberUtils.getIntLength(dividend)];
+		for (int index = 1; index < numberUtils.getIntLength(dividend); index++) {
+			dividendDigits[index] = numberUtils.getNthDigit(dividend, index);
 		}
 		return divisionResult;
 
-	}
-
-	private Integer getNthDigit(int sourceInt, int position) {
-		int length = getIntLength(sourceInt);
-
-		return sourceInt / (int) Math.pow(10, length - position) % 10;
-	}
-
-	public int getSubInt(int sourceInt, int startPosition, int endPosition) {
-
-		int[] digits = new int[getIntLength(sourceInt)];
-		for (int i = 0; i < getIntLength(sourceInt); i++) {
-			digits[i] = getNthDigit(sourceInt, i + 1);
-		}
-
-		int result = 0;
-		int index = startPosition;
-		int count = endPosition - startPosition + 1;
-		for (int i = count - 1; i >= 0; i--) {
-			result = (int) (result + digits[index] * Math.pow(10, i));
-			index++;
-		}
-		return result;
-	}
-
-	public int getIntLength(int sourceInt) {
-		if (sourceInt == 0) {
-			return 0;
-		} else {
-			return (int) (Math.log10(sourceInt) + 1);
-		}
 	}
 
 }

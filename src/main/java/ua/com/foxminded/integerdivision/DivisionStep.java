@@ -1,6 +1,7 @@
 package ua.com.foxminded.integerdivision;
 
 public class DivisionStep {
+
 	private int partialDividend;
 	private int divisionDigit;
 

@@ -5,14 +5,14 @@ import java.util.List;
 public class DivisionFormatter {
 
 	public static final String CR = System.lineSeparator();
-	IntegerDivision integerDivision = new IntegerDivision();
+	public static final char SPACE = " ".charAt(0);
+	public static final char DASH = "-".charAt(0);
+
+	NumberUtils numberUtils = new NumberUtils();
 
 	public String format(DivisionResult divisionResult) {
 
 		int divider = divisionResult.getDivider();
-		int dividend = divisionResult.getDividend();
-		int division = divisionResult.getDivision();
-
 		int partialDividend = divisionResult.getPartialDividend(0);
 
 		if ((divisionResult.divisionSteps.size() == 1) && (partialDividend == 0)) {
@@ -21,7 +21,7 @@ public class DivisionFormatter {
 
 		StringBuilder result = new StringBuilder(createHeader(divisionResult));
 
-		int index = integerDivision.getIntLength(partialDividend);
+		int index = numberUtils.getIntLength(partialDividend);
 
 		for (int j = 1; j < divisionResult.divisionSteps.size(); j++) {
 			partialDividend = divisionResult.getPartialDividend(j);
@@ -43,10 +43,10 @@ public class DivisionFormatter {
 		int divisionDigit = partialDividend / divider;
 		int multiplication = divider * divisionDigit;
 		int remainder = partialDividend - multiplication;
-		int spaces = index + 1 - integerDivision.getIntLength(remainder);
+		int spaces = index + 1 - numberUtils.getIntLength(remainder);
 		if (remainder > 0)
 			spaces++;
-		result = addChars(result, " ", spaces);
+		result = addChars(result, SPACE, spaces);
 		result.append(remainder);
 		return result.toString();
 	}
@@ -55,15 +55,15 @@ public class DivisionFormatter {
 		StringBuilder result = new StringBuilder();
 		int divisionDigit = partialDividend / divider;
 
-		int spaces = index + 1 - integerDivision.getIntLength(partialDividend);
-		result = addChars(result, " ", spaces);
+		int spaces = index + 1 - numberUtils.getIntLength(partialDividend);
+		result = addChars(result, SPACE, spaces);
 		result.append("_" + partialDividend + CR);
 		int multiplication = divider * divisionDigit;
-		spaces = index + 2 - integerDivision.getIntLength(multiplication);
-		result = addChars(result, " ", spaces);
+		spaces = index + 2 - numberUtils.getIntLength(multiplication);
+		result = addChars(result, SPACE, spaces);
 		result.append(multiplication + CR);
-		result = addChars(result, " ", spaces);
-		result = addChars(result, "-", String.valueOf(multiplication).length());
+		result = addChars(result, SPACE, spaces);
+		result = addChars(result, DASH, String.valueOf(multiplication).length());
 		result.append(CR);
 		return result.toString();
 
@@ -73,25 +73,23 @@ public class DivisionFormatter {
 		StringBuilder result = new StringBuilder();
 		int divider = divisionResult.getDivider();
 		int dividend = divisionResult.getDividend();
+		int division = divisionResult.getDivision();
 		int partialDividend = divisionResult.getPartialDividend(0);
-		int divisionDigit = partialDividend / divider;
+		int divisionDigit = divisionResult.getDivisionDigit(0);
 		int multiplication = divider * divisionDigit;
-		int index = integerDivision.getIntLength(partialDividend) - 1;
+		int index = numberUtils.getIntLength(partialDividend) - 1;
 
 		result.append("_" + dividend + "|" + divider + CR);
 		result.append(" " + multiplication);
-		result = addChars(result, " ", integerDivision.getIntLength(dividend) - index - 1);
+		result = addChars(result, SPACE, numberUtils.getIntLength(dividend) - index - 1);
 		result.append("|");
-		result = addChars(result, "-", divisionResult.divisionSteps.size());
+		result = addChars(result, DASH, divisionResult.divisionSteps.size());
 		result.append(CR + " ");
-		result = addChars(result, " ", index - integerDivision.getIntLength(multiplication));
-		result = addChars(result, "-", String.valueOf(multiplication).length());
-		result = addChars(result, " ", integerDivision.getIntLength(dividend) - index - 1);
-		result.append("|");
-		for (int j = 0; j < divisionResult.divisionSteps.size(); j++) {
-			divisionDigit = divisionResult.getPartialDividend(j) / divider;
-			result.append(String.valueOf(divisionDigit));
-		}
+		result = addChars(result, SPACE, index - numberUtils.getIntLength(multiplication));
+		result = addChars(result, DASH, String.valueOf(multiplication).length());
+		result = addChars(result, SPACE, numberUtils.getIntLength(dividend) - index - 1);
+		result.append("|" + division);
+
 		result.append(CR);
 
 		return result.toString();
@@ -103,17 +101,17 @@ public class DivisionFormatter {
 		int divider = divisionResult.getDivider();
 
 		result.append(String.valueOf(dividend) + "|" + String.valueOf(divider) + CR);
-		result = addChars(result, " ", integerDivision.getIntLength(dividend));
+		result = addChars(result, SPACE, numberUtils.getIntLength(dividend));
 		result.append("|");
-		result = addChars(result, "-", integerDivision.getIntLength(divider));
+		result = addChars(result, DASH, numberUtils.getIntLength(divider));
 		result.append(CR);
-		result = addChars(result, " ", integerDivision.getIntLength(dividend));
+		result = addChars(result, SPACE, numberUtils.getIntLength(dividend));
 		result.append("|0");
 
 		return result.toString();
 	}
 
-	private StringBuilder addChars(StringBuilder string, String symbol, int count) {
+	private StringBuilder addChars(StringBuilder string, char symbol, int count) {
 		StringBuilder result = string;
 		for (int i = 0; i < count; i++) {
 			result.append(symbol);
