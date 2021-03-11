@@ -9,6 +9,7 @@ public class DivisionResult {
 	private int dividend;
 	private int divider;
 	private int division;
+	private int remainder;
 
 	public void setDivisionSteps(List<DivisionStep> divisionSteps) {
 		this.divisionSteps = divisionSteps;
@@ -47,7 +48,8 @@ public class DivisionResult {
 
 	@Override
 	public String toString() {
-		return divisionSteps.toString() + ", dividend: " + dividend + ", divider: " + divider;
+		return divisionSteps.toString() + ", dividend: " + dividend + ", divider: " + divider + ", division: "
+				+ division + ", remainder: " + remainder;
 	}
 
 	public int getDivision() {
@@ -56,5 +58,13 @@ public class DivisionResult {
 
 	public void setDivision(int division) {
 		this.division = division;
+	}
+
+	public int getRemainder() {
+		return remainder;
+	}
+
+	public void setRemainder(int remainder) {
+		this.remainder = remainder;
 	}
 }

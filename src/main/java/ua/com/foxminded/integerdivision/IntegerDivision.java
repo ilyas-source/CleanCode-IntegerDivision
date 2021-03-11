@@ -1,5 +1,7 @@
 package ua.com.foxminded.integerdivision;
 
+import java.nio.channels.InterruptedByTimeoutException;
+
 public class IntegerDivision {
 
 	public DivisionResult divide(int dividend, int divider) {
@@ -49,6 +51,11 @@ public class IntegerDivision {
 			}
 
 		}
+
+		int steps = divisionResult.divisionSteps.size();
+		int lastPartialDividend = divisionResult.getPartialDividend(steps - 1);
+		int lastDivisionDigit = divisionResult.getDivisionDigit(steps - 1);
+		divisionResult.setRemainder(lastPartialDividend - divider * lastDivisionDigit);
 
 		return divisionResult;
 	}

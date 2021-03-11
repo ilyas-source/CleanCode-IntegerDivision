@@ -12,6 +12,7 @@ public class DivisionFormatter {
 
 		int divider = divisionResult.getDivider();
 		int partialDividend = divisionResult.getPartialDividend(0);
+		int remainder = divisionResult.getRemainder();
 
 		if ((divisionResult.divisionSteps.size() == 1) && (partialDividend == 0)) {
 			return createSimpleDivision(divisionResult);
@@ -28,7 +29,7 @@ public class DivisionFormatter {
 				result.append(createRegularStep(partialDividend, divider, index));
 			}
 			if (j == divisionResult.divisionSteps.size() - 1) {
-				result.append(createLastRemainderString(partialDividend, divider, index));
+				result.append(createLastRemainderString(remainder, index));
 			} else {
 				index++;
 			}
@@ -36,11 +37,8 @@ public class DivisionFormatter {
 		return result.toString();
 	}
 
-	private String createLastRemainderString(int partialDividend, int divider, int index) {
+	private String createLastRemainderString(int remainder, int index) {
 		StringBuilder result = new StringBuilder();
-		int divisionDigit = partialDividend / divider;
-		int multiplication = divider * divisionDigit;
-		int remainder = partialDividend - multiplication;
 		int spaces = index + 1 - numberUtils.getIntLength(remainder);
 		if (remainder > 0)
 			spaces++;
