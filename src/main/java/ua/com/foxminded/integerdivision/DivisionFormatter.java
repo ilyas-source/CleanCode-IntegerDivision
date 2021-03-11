@@ -1,7 +1,5 @@
 package ua.com.foxminded.integerdivision;
 
-import java.util.List;
-
 public class DivisionFormatter {
 
 	public static final String CR = System.lineSeparator();
@@ -46,7 +44,7 @@ public class DivisionFormatter {
 		int spaces = index + 1 - numberUtils.getIntLength(remainder);
 		if (remainder > 0)
 			spaces++;
-		result = addChars(result, SPACE, spaces);
+		result.append(repeatChar(SPACE, spaces));
 		result.append(remainder);
 		return result.toString();
 	}
@@ -56,14 +54,14 @@ public class DivisionFormatter {
 		int divisionDigit = partialDividend / divider;
 
 		int spaces = index + 1 - numberUtils.getIntLength(partialDividend);
-		result = addChars(result, SPACE, spaces);
+		result.append(repeatChar(SPACE, spaces));
 		result.append("_" + partialDividend + CR);
 		int multiplication = divider * divisionDigit;
 		spaces = index + 2 - numberUtils.getIntLength(multiplication);
-		result = addChars(result, SPACE, spaces);
+		result.append(repeatChar(SPACE, spaces));
 		result.append(multiplication + CR);
-		result = addChars(result, SPACE, spaces);
-		result = addChars(result, DASH, String.valueOf(multiplication).length());
+		result.append(repeatChar(SPACE, spaces));
+		result.append(repeatChar(DASH, String.valueOf(multiplication).length()));
 		result.append(CR);
 		return result.toString();
 
@@ -81,13 +79,15 @@ public class DivisionFormatter {
 
 		result.append("_" + dividend + "|" + divider + CR);
 		result.append(" " + multiplication);
-		result = addChars(result, SPACE, numberUtils.getIntLength(dividend) - index - 1);
+		result.append(repeatChar(SPACE, numberUtils.getIntLength(dividend) - index - 1));
+
 		result.append("|");
-		result = addChars(result, DASH, divisionResult.divisionSteps.size());
+		result.append(repeatChar(DASH, divisionResult.divisionSteps.size()));
+
 		result.append(CR + " ");
-		result = addChars(result, SPACE, index - numberUtils.getIntLength(multiplication));
-		result = addChars(result, DASH, String.valueOf(multiplication).length());
-		result = addChars(result, SPACE, numberUtils.getIntLength(dividend) - index - 1);
+		result.append(repeatChar(SPACE, index - numberUtils.getIntLength(multiplication)));
+		result.append(repeatChar(DASH, String.valueOf(multiplication).length()));
+		result.append(repeatChar(SPACE, numberUtils.getIntLength(dividend) - index - 1));
 		result.append("|" + division);
 
 		result.append(CR);
@@ -101,18 +101,18 @@ public class DivisionFormatter {
 		int divider = divisionResult.getDivider();
 
 		result.append(String.valueOf(dividend) + "|" + String.valueOf(divider) + CR);
-		result = addChars(result, SPACE, numberUtils.getIntLength(dividend));
+		result.append(repeatChar(SPACE, numberUtils.getIntLength(dividend)));
 		result.append("|");
-		result = addChars(result, DASH, numberUtils.getIntLength(divider));
+		result.append(repeatChar(DASH, numberUtils.getIntLength(divider)));
 		result.append(CR);
-		result = addChars(result, SPACE, numberUtils.getIntLength(dividend));
+		result.append(repeatChar(SPACE, numberUtils.getIntLength(dividend)));
 		result.append("|0");
 
 		return result.toString();
 	}
 
-	private StringBuilder addChars(StringBuilder string, char symbol, int count) {
-		StringBuilder result = string;
+	private StringBuilder repeatChar(char symbol, int count) {
+		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < count; i++) {
 			result.append(symbol);
 		}
