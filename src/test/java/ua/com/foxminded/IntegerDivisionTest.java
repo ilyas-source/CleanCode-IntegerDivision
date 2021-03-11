@@ -6,14 +6,12 @@ import static org.junit.Assert.assertThrows;
 import org.junit.Test;
 
 import junit.framework.TestCase;
-import ua.com.foxminded.integerdivision.DivisionFormatter;
 import ua.com.foxminded.integerdivision.DivisionResult;
 import ua.com.foxminded.integerdivision.IntegerDivision;
 
 public class IntegerDivisionTest {
 
 	IntegerDivision integerDivision = new IntegerDivision();
-	DivisionFormatter formatter = new DivisionFormatter();
 	String testString;
 
 	private static final String CR = System.lineSeparator();
@@ -24,8 +22,8 @@ public class IntegerDivisionTest {
 		int divider = 12345;
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 
-		String outputString = formatter.format(divisionResult);
-		String testString = "_12346|12345" + CR + " 12345|-" + CR + " -----|1" + CR;
+		String outputString = divisionResult.toString();
+		String testString = "[[12346,1]], dividend: 12346, divider: 12345, division: 1, remainder: 1";
 		TestCase.assertEquals(testString, outputString);
 	}
 
@@ -35,9 +33,8 @@ public class IntegerDivisionTest {
 		int divider = 45;
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 
-		String outputString = formatter.format(divisionResult);
-		String testString = "_4050225|45" + CR + " 405    |-----" + CR + " ---    |90005" + CR;
-		testString += "    _225" + CR + "     225" + CR + "     ---" + CR + "       0";
+		String outputString = divisionResult.toString();
+		String testString = "[[405,9], [0,0], [0,0], [0,0], [225,5]], dividend: 4050225, divider: 45, division: 90005, remainder: 0";
 		TestCase.assertEquals(testString, outputString);
 	}
 
@@ -47,11 +44,9 @@ public class IntegerDivisionTest {
 		int divider = 4;
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 
-		String outputString = formatter.format(divisionResult);
-		String testString = "_78945|4" + CR + " 4    |-----" + CR + " -    |19736";
-		testString += CR + "_38" + CR + " 36" + CR + " --" + CR + " _29" + CR + "  28" + CR + "  --";
-		testString += CR + "  _14" + CR + "   12" + CR + "   --" + CR + "   _25" + CR + "    24" + CR + "    --" + CR
-				+ "     1";
+		String outputString = divisionResult.toString();
+		String testString = "[[7,1], [38,9], [29,7], [14,3], [25,6]],";
+		testString += " dividend: 78945, divider: 4, division: 19736, remainder: 1";
 		TestCase.assertEquals(testString, outputString);
 	}
 
@@ -60,8 +55,8 @@ public class IntegerDivisionTest {
 		int dividend = 234;
 		int divider = 23456;
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
-		String outputString = formatter.format(divisionResult);
-		String testString = "234|23456" + CR + "   |-----" + CR + "   |0";
+		String outputString = divisionResult.toString();
+		String testString = "[[0,0]], dividend: 234, divider: 23456, division: 0, remainder: 0";
 		TestCase.assertEquals(testString, outputString);
 	}
 
