@@ -4,29 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DivisionResult {
-	private List<Integer> partialDividends = new ArrayList<>();
-	private List<Integer> divisionDigits = new ArrayList<>();
+
+	List<DivisionStep> divisionSteps = new ArrayList<>();
 	private int dividend;
 	private int divider;
+	private int division;
 
-	public List<Integer> getPartialDividends() {
-		return partialDividends;
+	public void setDivisionSteps(List<DivisionStep> divisionSteps) {
+		this.divisionSteps = divisionSteps;
 	}
 
-	public List<Integer> getDivisionDigits() {
-		return divisionDigits;
+	public void addDivisionStep(int partialDividend, int divisionDigit) {
+		DivisionStep d = new DivisionStep();
+		d.setPartialDividend(partialDividend);
+		d.setDivisionDigit(divisionDigit);
+		this.divisionSteps.add(d);
 	}
 
-	public void addPartialDividend(int partialDividend) {
-		this.partialDividends.add(partialDividend);
+	public int getPartialDividend(int index) {
+		return this.divisionSteps.get(index).getPartialDividend();
 	}
 
-	public void addDivisionDigit(int divisionDigit) {
-		this.divisionDigits.add(divisionDigit);
-	}
-
-	public void setPartialDividends(List<Integer> partialDividends) {
-		this.partialDividends = partialDividends;
+	public int getDivisionDigit(int index) {
+		return this.divisionSteps.get(index).getDivisionDigit();
 	}
 
 	public int getDividend() {
@@ -43,5 +43,18 @@ public class DivisionResult {
 
 	public void setDivider(int divider) {
 		this.divider = divider;
+	}
+
+	@Override
+	public String toString() {
+		return divisionSteps.toString() + ", dividend: " + dividend + ", divider: " + divider;
+	}
+
+	public int getDivision() {
+		return division;
+	}
+
+	public void setDivision(int division) {
+		this.division = division;
 	}
 }
