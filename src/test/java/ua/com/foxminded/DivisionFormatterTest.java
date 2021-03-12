@@ -1,8 +1,9 @@
 package ua.com.foxminded;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
+
 import ua.com.foxminded.integerdivision.DivisionFormatter;
 import ua.com.foxminded.integerdivision.DivisionResult;
 
@@ -38,7 +39,7 @@ public class DivisionFormatterTest {
 
 		String actual = formatter.format(divisionResult);
 
-		TestCase.assertEquals(expected.toString(), actual);
+		assertEquals(expected.toString(), actual);
 	}
 
 	@Test
@@ -72,7 +73,7 @@ public class DivisionFormatterTest {
 
 		String actual = formatter.format(divisionResult);
 
-		TestCase.assertEquals(expected.toString(), actual);
+		assertEquals(expected.toString(), actual);
 	}
 
 	@Test
@@ -98,6 +99,6 @@ public class DivisionFormatterTest {
 
 		String actual = formatter.format(divisionResult);
 
-		TestCase.assertEquals(expected.toString(), actual);
+		assertEquals(expected.toString(), actual);
 	}
 }

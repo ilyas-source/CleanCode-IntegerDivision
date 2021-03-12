@@ -1,11 +1,11 @@
 package ua.com.foxminded;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import junit.framework.TestCase;
 import ua.com.foxminded.integerdivision.DivisionResult;
 import ua.com.foxminded.integerdivision.IntegerDivision;
 
@@ -26,7 +26,7 @@ public class IntegerDivisionTest {
 
 		String actual = divisionResult.toString();
 
-		TestCase.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class IntegerDivisionTest {
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 		String actual = divisionResult.toString();
 
-		TestCase.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class IntegerDivisionTest {
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 		String actual = divisionResult.toString();
 
-		TestCase.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class IntegerDivisionTest {
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
 		String actual = divisionResult.toString();
 
-		TestCase.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	@Test
