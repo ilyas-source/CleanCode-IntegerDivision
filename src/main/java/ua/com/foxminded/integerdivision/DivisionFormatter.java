@@ -3,8 +3,8 @@ package ua.com.foxminded.integerdivision;
 public class DivisionFormatter {
 
 	public static final String CR = System.lineSeparator();
-	public static final char SPACE = " ".charAt(0);
-	public static final char DASH = "-".charAt(0);
+	public static final char SPACE = ' ';
+	public static final char DASH = '-';
 
 	NumberUtils numberUtils = new NumberUtils();
 

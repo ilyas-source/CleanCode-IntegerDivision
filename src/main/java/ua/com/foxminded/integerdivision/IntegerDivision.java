@@ -1,17 +1,15 @@
 package ua.com.foxminded.integerdivision;
 
-import java.nio.channels.InterruptedByTimeoutException;
-
 public class IntegerDivision {
 
 	public DivisionResult divide(int dividend, int divider) {
 
-		NumberUtils numberUtils = new NumberUtils();
-		int divisionDigit = 0;
-
 		if (divider == 0) {
 			throw new ArithmeticException("Division by zero");
 		}
+
+		NumberUtils numberUtils = new NumberUtils();
+		int divisionDigit = 0;
 
 		DivisionResult divisionResult = new DivisionResult();
 		int division = dividend / divider;

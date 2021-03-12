@@ -8,10 +8,9 @@ import ua.com.foxminded.integerdivision.DivisionResult;
 
 public class DivisionFormatterTest {
 
-	DivisionFormatter formatter = new DivisionFormatter();
-	String testString;
-
 	private static final String CR = System.lineSeparator();
+
+	DivisionFormatter formatter = new DivisionFormatter();
 
 	@Test
 	public void givenArray_onFormat_thenGetString() {
@@ -27,9 +26,17 @@ public class DivisionFormatterTest {
 		divisionResult.setDivider(45);
 		divisionResult.setDivision(90005);
 
-		String outputString = formatter.format(divisionResult);
-		String testString = "_4050225|45" + CR + " 405    |-----" + CR + " ---    |90005" + CR;
-		testString += "    _225" + CR + "     225" + CR + "     ---" + CR + "       0";
-		TestCase.assertEquals(testString, outputString);
+		StringBuilder expected = new StringBuilder();
+		expected.append("_4050225|45").append(CR);
+		expected.append(" 405    |-----").append(CR);
+		expected.append(" ---    |90005").append(CR);
+		expected.append("    _225").append(CR);
+		expected.append("     225").append(CR);
+		expected.append("     ---").append(CR);
+		expected.append("       0");
+
+		String actual = formatter.format(divisionResult);
+
+		TestCase.assertEquals(expected.toString(), actual);
 	}
 }
