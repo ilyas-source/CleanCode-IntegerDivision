@@ -89,9 +89,6 @@ public class IntegerDivisionTest {
 
 		DivisionResult actual = integerDivision.divide(234, 23456);
 
-		System.out.println(expected);
-		System.out.println(actual);
-
 		assertEquals(expected, actual);
 	}
 
