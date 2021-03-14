@@ -1,6 +1,6 @@
 package ua.com.foxminded.integerdivision;
 
-public class DivisionStep {
+public class DivisionStep implements Cloneable {
 
 	private int partialDividend;
 	private int divisionDigit;
@@ -25,4 +25,10 @@ public class DivisionStep {
 	public String toString() {
 		return "[" + partialDividend + "," + divisionDigit + "]";
 	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
 }

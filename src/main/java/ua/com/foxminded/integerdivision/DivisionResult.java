@@ -15,13 +15,6 @@ public class DivisionResult {
 		this.divisionSteps = divisionSteps;
 	}
 
-	public void addDivisionStep(int partialDividend, int divisionDigit) {
-		DivisionStep d = new DivisionStep();
-		d.setPartialDividend(partialDividend);
-		d.setDivisionDigit(divisionDigit);
-		this.divisionSteps.add(d);
-	}
-
 	public int getPartialDividend(int index) {
 		return this.divisionSteps.get(index).getPartialDividend();
 	}

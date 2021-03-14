@@ -14,7 +14,7 @@ public class IntegerDivisionTest {
 	private static final String CR = System.lineSeparator();
 
 	@Test
-	public void given12346And12345_onIntegerDivision_thenGetString() {
+	public void given12346And12345_onIntegerDivision_thenGetString() throws CloneNotSupportedException {
 		int dividend = 12346;
 		int divider = 12345;
 		DivisionResult divisionResult = integerDivision.divide(dividend, divider);
@@ -27,7 +27,7 @@ public class IntegerDivisionTest {
 	}
 
 	@Test
-	public void given4050225And405_onIntegerDivision_thenGetString() {
+	public void given4050225And405_onIntegerDivision_thenGetString() throws CloneNotSupportedException {
 		int dividend = 4050225;
 		int divider = 45;
 		String expected = "[[405,9], [0,0], [0,0], [0,0], [225,5]], dividend: 4050225, divider: 45, division: 90005, remainder: 0";
@@ -39,7 +39,7 @@ public class IntegerDivisionTest {
 	}
 
 	@Test
-	public void given78945And4_onIntegerDivision_thenGetString() {
+	public void given78945And4_onIntegerDivision_thenGetString() throws CloneNotSupportedException {
 		int dividend = 78945;
 		int divider = 4;
 		String expected = "[[7,1], [38,9], [29,7], [14,3], [25,6]],";
@@ -52,7 +52,7 @@ public class IntegerDivisionTest {
 	}
 
 	@Test
-	public void given234And23456_onIntegerDivision_thenGetString() {
+	public void given234And23456_onIntegerDivision_thenGetString() throws CloneNotSupportedException {
 		int dividend = 234;
 		int divider = 23456;
 		String expected = "[[0,0]], dividend: 234, divider: 23456, division: 0, remainder: 0";
