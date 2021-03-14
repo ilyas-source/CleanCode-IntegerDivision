@@ -6,8 +6,6 @@ public class DivisionFormatter {
 	public static final char SPACE = ' ';
 	public static final char DASH = '-';
 
-	NumberUtils numberUtils = new NumberUtils();
-
 	public String format(DivisionResult divisionResult) {
 
 		int divider = divisionResult.getDivider();
@@ -20,7 +18,7 @@ public class DivisionFormatter {
 
 		StringBuilder result = new StringBuilder(createHeader(divisionResult));
 
-		int index = numberUtils.getIntLength(partialDividend);
+		int index = NumberUtils.getIntLength(partialDividend);
 
 		for (int j = 1; j < divisionResult.divisionSteps.size(); j++) {
 			partialDividend = divisionResult.getPartialDividend(j);
@@ -39,7 +37,7 @@ public class DivisionFormatter {
 
 	private String createLastRemainderString(int remainder, int index) {
 		StringBuilder result = new StringBuilder();
-		int spaces = index + 1 - numberUtils.getIntLength(remainder);
+		int spaces = index + 1 - NumberUtils.getIntLength(remainder);
 		if (remainder > 0)
 			spaces++;
 		result.append(repeatChar(SPACE, spaces));
@@ -51,11 +49,11 @@ public class DivisionFormatter {
 		StringBuilder result = new StringBuilder();
 		int divisionDigit = partialDividend / divider;
 
-		int spaces = index + 1 - numberUtils.getIntLength(partialDividend);
+		int spaces = index + 1 - NumberUtils.getIntLength(partialDividend);
 		result.append(repeatChar(SPACE, spaces));
 		result.append("_" + partialDividend + CR);
 		int multiplication = divider * divisionDigit;
-		spaces = index + 2 - numberUtils.getIntLength(multiplication);
+		spaces = index + 2 - NumberUtils.getIntLength(multiplication);
 		result.append(repeatChar(SPACE, spaces));
 		result.append(multiplication + CR);
 		result.append(repeatChar(SPACE, spaces));
@@ -73,19 +71,19 @@ public class DivisionFormatter {
 		int partialDividend = divisionResult.getPartialDividend(0);
 		int divisionDigit = divisionResult.getDivisionDigit(0);
 		int multiplication = divider * divisionDigit;
-		int index = numberUtils.getIntLength(partialDividend) - 1;
+		int index = NumberUtils.getIntLength(partialDividend) - 1;
 
 		result.append("_" + dividend + "|" + divider + CR);
 		result.append(" " + multiplication);
-		result.append(repeatChar(SPACE, numberUtils.getIntLength(dividend) - index - 1));
+		result.append(repeatChar(SPACE, NumberUtils.getIntLength(dividend) - index - 1));
 
 		result.append("|");
 		result.append(repeatChar(DASH, divisionResult.divisionSteps.size()));
 
 		result.append(CR + " ");
-		result.append(repeatChar(SPACE, index - numberUtils.getIntLength(multiplication)));
+		result.append(repeatChar(SPACE, index - NumberUtils.getIntLength(multiplication)));
 		result.append(repeatChar(DASH, String.valueOf(multiplication).length()));
-		result.append(repeatChar(SPACE, numberUtils.getIntLength(dividend) - index - 1));
+		result.append(repeatChar(SPACE, NumberUtils.getIntLength(dividend) - index - 1));
 		result.append("|" + division);
 
 		result.append(CR);
@@ -99,11 +97,11 @@ public class DivisionFormatter {
 		int divider = divisionResult.getDivider();
 
 		result.append(dividend + "|" + divider + CR);
-		result.append(repeatChar(SPACE, numberUtils.getIntLength(dividend)));
+		result.append(repeatChar(SPACE, NumberUtils.getIntLength(dividend)));
 		result.append("|");
-		result.append(repeatChar(DASH, numberUtils.getIntLength(divider)));
+		result.append(repeatChar(DASH, NumberUtils.getIntLength(divider)));
 		result.append(CR);
-		result.append(repeatChar(SPACE, numberUtils.getIntLength(dividend)));
+		result.append(repeatChar(SPACE, NumberUtils.getIntLength(dividend)));
 		result.append("|0");
 
 		return result.toString();
