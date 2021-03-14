@@ -39,12 +39,6 @@ public class DivisionResult {
 		this.divider = divider;
 	}
 
-	@Override
-	public String toString() {
-		return divisionSteps.toString() + ", dividend: " + dividend + ", divider: " + divider + ", division: "
-				+ division + ", remainder: " + remainder;
-	}
-
 	public int getDivision() {
 		return division;
 	}
@@ -59,5 +53,48 @@ public class DivisionResult {
 
 	public void setRemainder(int remainder) {
 		this.remainder = remainder;
+	}
+
+	@Override
+	public String toString() {
+		return divisionSteps.toString() + ", dividend: " + dividend + ", divider: " + divider + ", division: "
+				+ division + ", remainder: " + remainder;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + dividend;
+		result = prime * result + divider;
+		result = prime * result + division;
+		result = prime * result + ((divisionSteps == null) ? 0 : divisionSteps.hashCode());
+		result = prime * result + remainder;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DivisionResult other = (DivisionResult) obj;
+		if (dividend != other.dividend)
+			return false;
+		if (divider != other.divider)
+			return false;
+		if (division != other.division)
+			return false;
+		if (divisionSteps == null) {
+			if (other.divisionSteps != null)
+				return false;
+		} else if (!divisionSteps.equals(other.divisionSteps))
+			return false;
+		if (remainder != other.remainder)
+			return false;
+		return true;
 	}
 }

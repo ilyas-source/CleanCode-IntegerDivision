@@ -7,7 +7,6 @@ public class DivisionFormatter {
 	public static final char DASH = '-';
 
 	public String format(DivisionResult divisionResult) {
-
 		int divider = divisionResult.getDivider();
 		int partialDividend = divisionResult.getPartialDividend(0);
 		int remainder = divisionResult.getRemainder();

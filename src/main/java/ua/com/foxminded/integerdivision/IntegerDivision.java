@@ -6,7 +6,6 @@ import java.util.List;
 public class IntegerDivision {
 
 	public DivisionResult divide(int dividend, int divider) throws CloneNotSupportedException {
-
 		if (divider == 0) {
 			throw new ArithmeticException("Division by zero");
 		}
