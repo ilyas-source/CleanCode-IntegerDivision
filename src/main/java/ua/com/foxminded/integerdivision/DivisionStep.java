@@ -1,10 +1,21 @@
 package ua.com.foxminded.integerdivision;
 
-public class DivisionStep implements Cloneable {
+public class DivisionStep {
 
 	private int partialDividend;
 	private int divisionDigit;
 	private int multiplication;
+
+	public DivisionStep(int partialDividend, int divisionDigit, int multiplication) {
+		this.setPartialDividend(partialDividend);
+		this.setDivisionDigit(divisionDigit);
+		this.setMultiplication(multiplication);
+
+	}
+
+	public DivisionStep() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getPartialDividend() {
 		return partialDividend;
@@ -20,11 +31,6 @@ public class DivisionStep implements Cloneable {
 
 	public void setDivisionDigit(int divisionDigit) {
 		this.divisionDigit = divisionDigit;
-	}
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
 	}
 
 	@Override

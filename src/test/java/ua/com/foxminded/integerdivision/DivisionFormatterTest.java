@@ -12,22 +12,19 @@ public class DivisionFormatterTest {
 	private static final String CR = System.lineSeparator();
 
 	DivisionFormatter formatter = new DivisionFormatter();
-	DivisionStep divisionStep = new DivisionStep();
-	List<DivisionStep> divisionSteps = new ArrayList<>();
 
 	@Test
-	public void given234And23456_onFormat_thenGetSimpleDivision() throws CloneNotSupportedException {
+	public void given234And23456_onFormat_thenGetSimpleDivisionString() {
 		DivisionResult divisionResult = new DivisionResult();
+		List<DivisionStep> divisionSteps = new ArrayList<>();
 
 		divisionResult.setDividend(234);
 		divisionResult.setDivider(23456);
 		divisionResult.setDivision(0);
 		divisionResult.setRemainder(0);
 
-		divisionStep.setPartialDividend(234);
-		divisionStep.setDivisionDigit(0);
-		divisionStep.setMultiplication(234);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		DivisionStep divisionStep = new DivisionStep(234, 0, 234);
+		divisionSteps.add(divisionStep);
 
 		divisionResult.setDivisionSteps(divisionSteps);
 
@@ -39,32 +36,25 @@ public class DivisionFormatterTest {
 
 		String actual = formatter.format(divisionResult);
 
-		System.out.println(expected);
-		System.out.println(actual);
 		assertEquals(expected.toString(), actual);
 
 	}
 
 	@Test
-	public void given4050225And45_onFormat_thenGetString() throws CloneNotSupportedException {
+	public void given4050225And45_onFormat_thenGetString() {
 		DivisionResult divisionResult = new DivisionResult();
+		List<DivisionStep> divisionSteps = new ArrayList<>();
 
-		divisionStep.setPartialDividend(405);
-		divisionStep.setDivisionDigit(9);
-		divisionStep.setMultiplication(405);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		DivisionStep divisionStep = new DivisionStep(405, 9, 405);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(0);
-		divisionStep.setDivisionDigit(0);
-		divisionStep.setMultiplication(0);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
-		divisionSteps.add((DivisionStep) divisionStep.clone());
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(0, 0, 0);
+		divisionSteps.add(divisionStep);
+		divisionSteps.add(divisionStep);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(225);
-		divisionStep.setDivisionDigit(5);
-		divisionStep.setMultiplication(225);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(225, 5, 225);
+		divisionSteps.add(divisionStep);
 
 		divisionResult.setDivisionSteps(divisionSteps);
 
@@ -90,26 +80,19 @@ public class DivisionFormatterTest {
 	@Test
 	public void given986430And329_onFormat_thenGetString() throws CloneNotSupportedException {
 		DivisionResult divisionResult = new DivisionResult();
+		List<DivisionStep> divisionSteps = new ArrayList<>();
 
-		divisionStep.setPartialDividend(986);
-		divisionStep.setDivisionDigit(2);
-		divisionStep.setMultiplication(658);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		DivisionStep divisionStep = new DivisionStep(986, 2, 658);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(3284);
-		divisionStep.setDivisionDigit(9);
-		divisionStep.setMultiplication(2961);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(3284, 9, 2961);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(3233);
-		divisionStep.setDivisionDigit(9);
-		divisionStep.setMultiplication(2961);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(3233, 9, 2961);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(2720);
-		divisionStep.setDivisionDigit(8);
-		divisionStep.setMultiplication(2632);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(2720, 8, 2632);
+		divisionSteps.add(divisionStep);
 
 		divisionResult.setDivisionSteps(divisionSteps);
 
@@ -141,16 +124,13 @@ public class DivisionFormatterTest {
 	@Test
 	public void given12349And124_onFormat_thenGetString() throws CloneNotSupportedException {
 		DivisionResult divisionResult = new DivisionResult();
+		List<DivisionStep> divisionSteps = new ArrayList<>();
 
-		divisionStep.setPartialDividend(1234);
-		divisionStep.setDivisionDigit(9);
-		divisionStep.setMultiplication(1116);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		DivisionStep divisionStep = new DivisionStep(1234, 9, 1116);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(1189);
-		divisionStep.setDivisionDigit(9);
-		divisionStep.setMultiplication(1116);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(1189, 9, 1116);
+		divisionSteps.add(divisionStep);
 
 		divisionResult.setDivisionSteps(divisionSteps);
 

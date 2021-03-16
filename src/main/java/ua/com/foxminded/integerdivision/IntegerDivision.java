@@ -5,7 +5,7 @@ import java.util.List;
 
 public class IntegerDivision {
 
-	public DivisionResult divide(int dividend, int divider) throws CloneNotSupportedException {
+	public DivisionResult divide(int dividend, int divider) {
 		if (divider == 0) {
 			throw new ArithmeticException("Division by zero");
 		}
@@ -21,10 +21,7 @@ public class IntegerDivision {
 		List<DivisionStep> divisionSteps = new ArrayList<>();
 
 		if (dividend < divider) {
-			DivisionStep divisionStep = new DivisionStep();
-			divisionStep.setPartialDividend(0);
-			divisionStep.setDivisionDigit(0);
-			divisionStep.setMultiplication(0);
+			DivisionStep divisionStep = new DivisionStep(0, 0, 0);
 			divisionSteps.add(divisionStep);
 			divisionResult.setDivisionSteps(divisionSteps);
 			return divisionResult;
@@ -33,11 +30,8 @@ public class IntegerDivision {
 		int partialDividend = NumberUtils.getNthDigit(dividend, 1);
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
-			DivisionStep divisionStep = new DivisionStep();
-			divisionStep.setPartialDividend(partialDividend);
-			divisionStep.setDivisionDigit(divisionDigit);
-			divisionStep.setMultiplication(divider * divisionDigit);
-			divisionSteps.add((DivisionStep) divisionStep.clone());
+			DivisionStep divisionStep = new DivisionStep(partialDividend, divisionDigit, divider * divisionDigit);
+			divisionSteps.add(divisionStep);
 			partialDividend = partialDividend - divider * divisionDigit;
 			division = divisionDigit;
 		}
@@ -50,20 +44,14 @@ public class IntegerDivision {
 
 			if (partialDividend > divider) {
 				divisionDigit = partialDividend / divider;
-				DivisionStep divisionStep = new DivisionStep();
-				divisionStep.setPartialDividend(partialDividend);
-				divisionStep.setDivisionDigit(divisionDigit);
-				divisionStep.setMultiplication(divider * divisionDigit);
-				divisionSteps.add((DivisionStep) divisionStep.clone());
+				DivisionStep divisionStep = new DivisionStep(partialDividend, divisionDigit, divider * divisionDigit);
+				divisionSteps.add(divisionStep);
 				partialDividend = partialDividend - divider * divisionDigit;
 				division = division * 10 + divisionDigit;
 			} else {
 				if (!divisionSteps.isEmpty()) {
-					DivisionStep divisionStep = new DivisionStep();
-					divisionStep.setPartialDividend(0);
-					divisionStep.setDivisionDigit(0);
-					divisionStep.setMultiplication(0);
-					divisionSteps.add((DivisionStep) divisionStep.clone());
+					DivisionStep divisionStep = new DivisionStep(0, 0, 0);
+					divisionSteps.add(divisionStep);
 					division = division * 10;
 				}
 			}
@@ -71,13 +59,13 @@ public class IntegerDivision {
 		}
 
 		divisionResult.setDivisionSteps(divisionSteps);
-		int steps = divisionResult.divisionSteps.size();
+		// int steps = divisionResult.divisionSteps.size();
+		int steps = divisionResult.getDivisionSteps().size();
 		int lastPartialDividend = divisionResult.getPartialDividend(steps - 1);
 		int lastDivisionDigit = divisionResult.getDivisionDigit(steps - 1);
 		divisionResult.setDivision(division);
 		divisionResult.setRemainder(lastPartialDividend - divider * lastDivisionDigit);
-//		System.out.println("Final object for " + dividend + " and " + divider + " is:");
-//		System.out.println(divisionResult);
+
 		return divisionResult;
 	}
 }

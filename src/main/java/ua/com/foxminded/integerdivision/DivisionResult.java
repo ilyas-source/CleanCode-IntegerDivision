@@ -5,7 +5,8 @@ import java.util.List;
 
 public class DivisionResult {
 
-	List<DivisionStep> divisionSteps = new ArrayList<>();
+	private List<DivisionStep> divisionSteps = new ArrayList<>();
+
 	private int dividend;
 	private int divider;
 	private int division;
@@ -13,6 +14,10 @@ public class DivisionResult {
 
 	public void setDivisionSteps(List<DivisionStep> divisionSteps) {
 		this.divisionSteps = divisionSteps;
+	}
+
+	public List<DivisionStep> getDivisionSteps() {
+		return divisionSteps;
 	}
 
 	public int getPartialDividend(int index) {

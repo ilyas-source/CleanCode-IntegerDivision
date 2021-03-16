@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 public class IntegerDivisionTest {
 
 	IntegerDivision integerDivision = new IntegerDivision();
+	List<DivisionStep> divisionSteps = new ArrayList<>();
 
 	@Test
 	public void given78945And4_onIntegerDivision_thenGetString() throws CloneNotSupportedException {
@@ -24,31 +25,20 @@ public class IntegerDivisionTest {
 
 		List<DivisionStep> divisionSteps = new ArrayList<>();
 
-		DivisionStep divisionStep = new DivisionStep();
-		divisionStep.setPartialDividend(7);
-		divisionStep.setDivisionDigit(1);
-		divisionStep.setMultiplication(4);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		DivisionStep divisionStep = new DivisionStep(7, 1, 4);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(38);
-		divisionStep.setDivisionDigit(9);
-		divisionStep.setMultiplication(36);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(38, 9, 36);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(29);
-		divisionStep.setDivisionDigit(7);
-		divisionStep.setMultiplication(28);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(29, 7, 28);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(14);
-		divisionStep.setDivisionDigit(3);
-		divisionStep.setMultiplication(12);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(14, 3, 12);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(25);
-		divisionStep.setDivisionDigit(6);
-		divisionStep.setMultiplication(24);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(25, 6, 24);
+		divisionSteps.add(divisionStep);
 
 		expected.setDivisionSteps(divisionSteps);
 
@@ -58,7 +48,7 @@ public class IntegerDivisionTest {
 	}
 
 	@Test
-	public void given12346And12345_onIntegerDivision_thenGetString() throws CloneNotSupportedException {
+	public void given12346And12345_onIntegerDivision_thenGetString() {
 		DivisionResult expected = new DivisionResult();
 
 		expected.setDividend(12346);
@@ -82,27 +72,19 @@ public class IntegerDivisionTest {
 	}
 
 	@Test
-	public void given4050225And405_onIntegerDivision_thenGetString() throws CloneNotSupportedException {
+	public void given4050225And405_onIntegerDivision_thenGetString() {
 		DivisionResult expected = new DivisionResult();
 
-		DivisionStep divisionStep = new DivisionStep();
-		List<DivisionStep> divisionSteps = new ArrayList<>();
-		divisionStep.setPartialDividend(405);
-		divisionStep.setDivisionDigit(9);
-		divisionStep.setMultiplication(405);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		DivisionStep divisionStep = new DivisionStep(405, 9, 405);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(0);
-		divisionStep.setDivisionDigit(0);
-		divisionStep.setMultiplication(0);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
-		divisionSteps.add((DivisionStep) divisionStep.clone());
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(0, 0, 0);
+		divisionSteps.add(divisionStep);
+		divisionSteps.add(divisionStep);
+		divisionSteps.add(divisionStep);
 
-		divisionStep.setPartialDividend(225);
-		divisionStep.setDivisionDigit(5);
-		divisionStep.setMultiplication(225);
-		divisionSteps.add((DivisionStep) divisionStep.clone());
+		divisionStep = new DivisionStep(225, 5, 225);
+		divisionSteps.add(divisionStep);
 
 		expected.setDivisionSteps(divisionSteps);
 

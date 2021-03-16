@@ -10,21 +10,15 @@ public class DivisionFormatter {
 		int divider = divisionResult.getDivider();
 		int partialDividend = divisionResult.getPartialDividend(0);
 		int remainder = divisionResult.getRemainder();
-
-		if ((divisionResult.divisionSteps.size() == 1) && (partialDividend == 0)) {
-			return createSimpleDivision(divisionResult);
-		}
-
 		StringBuilder result = new StringBuilder(createHeader(divisionResult));
 
 		int indent = NumberUtils.getIntLength(partialDividend);
 
-		for (int j = 1; j < divisionResult.divisionSteps.size(); j++) {
+		for (int j = 1; j < divisionResult.getDivisionSteps().size(); j++) {
 			partialDividend = divisionResult.getPartialDividend(j);
 
 			if (partialDividend > 0) {
-//				result.append(createStep(partialDividend, divider, indent));
-				result.append(createStep(divisionResult.divisionSteps.get(j), divider, indent));
+				result.append(createStep(divisionResult.getDivisionSteps().get(j), divider, indent));
 			}
 			indent++;
 		}
@@ -74,7 +68,7 @@ public class DivisionFormatter {
 		result.append(repeatChar(SPACE, NumberUtils.getIntLength(dividend) - index - 1));
 
 		result.append("|");
-		result.append(repeatChar(DASH, divisionResult.divisionSteps.size()));
+		result.append(repeatChar(DASH, divisionResult.getDivisionSteps().size()));
 
 		result.append(CR + " ");
 		result.append(repeatChar(SPACE, index - NumberUtils.getIntLength(multiplication)));
@@ -83,22 +77,6 @@ public class DivisionFormatter {
 		result.append("|" + division);
 
 		result.append(CR);
-
-		return result.toString();
-	}
-
-	private String createSimpleDivision(DivisionResult divisionResult) {
-		StringBuilder result = new StringBuilder();
-		int dividend = divisionResult.getDividend();
-		int divider = divisionResult.getDivider();
-
-		result.append(dividend + "|" + divider + CR);
-		result.append(repeatChar(SPACE, NumberUtils.getIntLength(dividend)));
-		result.append("|");
-		result.append(repeatChar(DASH, NumberUtils.getIntLength(divider)));
-		result.append(CR);
-		result.append(repeatChar(SPACE, NumberUtils.getIntLength(dividend)));
-		result.append("|0");
 
 		return result.toString();
 	}
