@@ -17,34 +17,32 @@ public class DivisionFormatter {
 
 		StringBuilder result = new StringBuilder(createHeader(divisionResult));
 
-		int index = NumberUtils.getIntLength(partialDividend);
+		int indent = NumberUtils.getIntLength(partialDividend);
 
 		for (int j = 1; j < divisionResult.divisionSteps.size(); j++) {
 			partialDividend = divisionResult.getPartialDividend(j);
 
 			if (partialDividend > 0) {
-				result.append(createRegularStep(partialDividend, divider, index));
+				result.append(createStep(partialDividend, divider, indent));
 			}
-			if (j == divisionResult.divisionSteps.size() - 1) {
-				result.append(createLastRemainderString(remainder, index));
-			} else {
-				index++;
-			}
+			indent++;
 		}
+		result.append(formatRemainder(remainder, indent));
 		return result.toString();
 	}
 
-	private String createLastRemainderString(int remainder, int index) {
+	private String formatRemainder(int remainder, int index) {
 		StringBuilder result = new StringBuilder();
-		int spaces = index + 1 - NumberUtils.getIntLength(remainder);
-		if (remainder > 0)
+		int spaces = index - NumberUtils.getIntLength(remainder);
+		if (remainder > 0) {
 			spaces++;
+		}
 		result.append(repeatChar(SPACE, spaces));
 		result.append(remainder);
 		return result.toString();
 	}
 
-	private String createRegularStep(int partialDividend, int divider, int index) {
+	private String createStep(int partialDividend, int divider, int index) {
 		StringBuilder result = new StringBuilder();
 		int divisionDigit = partialDividend / divider;
 

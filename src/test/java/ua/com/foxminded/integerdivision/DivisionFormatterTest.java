@@ -50,6 +50,8 @@ public class DivisionFormatterTest {
 		expected.append("       0");
 
 		String actual = formatter.format(divisionResult);
+		System.out.println(actual);
+		System.out.println(expected);
 
 		assertEquals(expected.toString(), actual);
 	}
@@ -98,6 +100,9 @@ public class DivisionFormatterTest {
 
 		String actual = formatter.format(divisionResult);
 
+		System.out.println(expected);
+		System.out.println(actual);
+
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -130,6 +135,8 @@ public class DivisionFormatterTest {
 		expected.append("    73");
 
 		String actual = formatter.format(divisionResult);
+		System.out.println(expected);
+		System.out.println(actual);
 
 		assertEquals(expected.toString(), actual);
 	}

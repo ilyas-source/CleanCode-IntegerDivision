@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 public class IntegerDivisionTest {
 
 	IntegerDivision integerDivision = new IntegerDivision();
-	String testString;
 
 	@Test
 	public void given12346And12345_onIntegerDivision_thenGetString() throws CloneNotSupportedException {

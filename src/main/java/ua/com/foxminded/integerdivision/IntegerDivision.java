@@ -17,12 +17,11 @@ public class IntegerDivision {
 		dividend = Math.abs(dividend);
 		divisionResult.setDividend(dividend);
 		divisionResult.setDivider(divider);
-		divisionResult.setDivision(division);
 
-		DivisionStep divisionStep = new DivisionStep();
 		List<DivisionStep> divisionSteps = new ArrayList<>();
 
 		if (dividend < divider) {
+			DivisionStep divisionStep = new DivisionStep();
 			divisionStep.setPartialDividend(0);
 			divisionStep.setDivisionDigit(0);
 			divisionSteps.add(divisionStep);
@@ -33,6 +32,7 @@ public class IntegerDivision {
 		int partialDividend = NumberUtils.getNthDigit(dividend, 1);
 		if (partialDividend > divider) {
 			divisionDigit = partialDividend / divider;
+			DivisionStep divisionStep = new DivisionStep();
 			divisionStep.setPartialDividend(partialDividend);
 			divisionStep.setDivisionDigit(divisionDigit);
 			divisionSteps.add((DivisionStep) divisionStep.clone());
@@ -48,15 +48,15 @@ public class IntegerDivision {
 
 			if (partialDividend > divider) {
 				divisionDigit = partialDividend / divider;
+				DivisionStep divisionStep = new DivisionStep();
 				divisionStep.setPartialDividend(partialDividend);
 				divisionStep.setDivisionDigit(divisionDigit);
 				divisionSteps.add((DivisionStep) divisionStep.clone());
 				partialDividend = partialDividend - divider * divisionDigit;
 				division = division * 10 + divisionDigit;
-			}
-
-			else {
+			} else {
 				if (!divisionSteps.isEmpty()) {
+					DivisionStep divisionStep = new DivisionStep();
 					divisionStep.setPartialDividend(0);
 					divisionStep.setDivisionDigit(0);
 					divisionSteps.add((DivisionStep) divisionStep.clone());
