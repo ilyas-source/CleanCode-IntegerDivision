@@ -14,6 +14,50 @@ public class IntegerDivisionTest {
 	IntegerDivision integerDivision = new IntegerDivision();
 
 	@Test
+	public void given78945And4_onIntegerDivision_thenGetString() throws CloneNotSupportedException {
+		DivisionResult expected = new DivisionResult();
+
+		expected.setDividend(78945);
+		expected.setDivider(4);
+		expected.setDivision(19736);
+		expected.setRemainder(1);
+
+		List<DivisionStep> divisionSteps = new ArrayList<>();
+
+		DivisionStep divisionStep = new DivisionStep();
+		divisionStep.setPartialDividend(7);
+		divisionStep.setDivisionDigit(1);
+		divisionStep.setMultiplication(4);
+		divisionSteps.add((DivisionStep) divisionStep.clone());
+
+		divisionStep.setPartialDividend(38);
+		divisionStep.setDivisionDigit(9);
+		divisionStep.setMultiplication(36);
+		divisionSteps.add((DivisionStep) divisionStep.clone());
+
+		divisionStep.setPartialDividend(29);
+		divisionStep.setDivisionDigit(7);
+		divisionStep.setMultiplication(28);
+		divisionSteps.add((DivisionStep) divisionStep.clone());
+
+		divisionStep.setPartialDividend(14);
+		divisionStep.setDivisionDigit(3);
+		divisionStep.setMultiplication(12);
+		divisionSteps.add((DivisionStep) divisionStep.clone());
+
+		divisionStep.setPartialDividend(25);
+		divisionStep.setDivisionDigit(6);
+		divisionStep.setMultiplication(24);
+		divisionSteps.add((DivisionStep) divisionStep.clone());
+
+		expected.setDivisionSteps(divisionSteps);
+
+		DivisionResult actual = integerDivision.divide(78945, 4);
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
 	public void given12346And12345_onIntegerDivision_thenGetString() throws CloneNotSupportedException {
 		DivisionResult expected = new DivisionResult();
 
@@ -25,6 +69,7 @@ public class IntegerDivisionTest {
 		DivisionStep divisionStep = new DivisionStep();
 		divisionStep.setPartialDividend(12346);
 		divisionStep.setDivisionDigit(1);
+		divisionStep.setMultiplication(12345);
 
 		List<DivisionStep> divisionSteps = new ArrayList<>();
 		divisionSteps.add(divisionStep);
@@ -44,16 +89,19 @@ public class IntegerDivisionTest {
 		List<DivisionStep> divisionSteps = new ArrayList<>();
 		divisionStep.setPartialDividend(405);
 		divisionStep.setDivisionDigit(9);
+		divisionStep.setMultiplication(405);
 		divisionSteps.add((DivisionStep) divisionStep.clone());
 
 		divisionStep.setPartialDividend(0);
 		divisionStep.setDivisionDigit(0);
+		divisionStep.setMultiplication(0);
 		divisionSteps.add((DivisionStep) divisionStep.clone());
 		divisionSteps.add((DivisionStep) divisionStep.clone());
 		divisionSteps.add((DivisionStep) divisionStep.clone());
 
 		divisionStep.setPartialDividend(225);
 		divisionStep.setDivisionDigit(5);
+		divisionStep.setMultiplication(225);
 		divisionSteps.add((DivisionStep) divisionStep.clone());
 
 		expected.setDivisionSteps(divisionSteps);

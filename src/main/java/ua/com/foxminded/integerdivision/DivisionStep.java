@@ -1,11 +1,10 @@
 package ua.com.foxminded.integerdivision;
 
-import org.junit.platform.commons.util.ToStringBuilder;
-
 public class DivisionStep implements Cloneable {
 
 	private int partialDividend;
 	private int divisionDigit;
+	private int multiplication;
 
 	public int getPartialDividend() {
 		return partialDividend;
@@ -30,7 +29,15 @@ public class DivisionStep implements Cloneable {
 
 	@Override
 	public String toString() {
-		return partialDividend + "," + divisionDigit;
+		return "[PD:" + partialDividend + ", DD:" + divisionDigit + ", M:" + multiplication + "]";
+	}
+
+	public int getMultiplication() {
+		return multiplication;
+	}
+
+	public void setMultiplication(int multiplication) {
+		this.multiplication = multiplication;
 	}
 
 	@Override
@@ -38,6 +45,7 @@ public class DivisionStep implements Cloneable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + divisionDigit;
+		result = prime * result + multiplication;
 		result = prime * result + partialDividend;
 		return result;
 	}
@@ -52,6 +60,8 @@ public class DivisionStep implements Cloneable {
 			return false;
 		DivisionStep other = (DivisionStep) obj;
 		if (divisionDigit != other.divisionDigit)
+			return false;
+		if (multiplication != other.multiplication)
 			return false;
 		if (partialDividend != other.partialDividend)
 			return false;

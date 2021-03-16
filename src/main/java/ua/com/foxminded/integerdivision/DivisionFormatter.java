@@ -25,7 +25,6 @@ public class DivisionFormatter {
 			if (partialDividend > 0) {
 //				result.append(createStep(partialDividend, divider, indent));
 				result.append(createStep(divisionResult.divisionSteps.get(j), divider, indent));
-				System.out.println(result);
 			}
 			indent++;
 		}
@@ -35,13 +34,12 @@ public class DivisionFormatter {
 
 	private String createStep(DivisionStep divisionStep, int divider, int indent) {
 		StringBuilder result = new StringBuilder();
-		int divisionDigit = divisionStep.getDivisionDigit();
 		int partialDividend = divisionStep.getPartialDividend();
+		int multiplication = divisionStep.getMultiplication();
 
 		int spaces = indent + 1 - NumberUtils.getIntLength(partialDividend);
 		result.append(repeatChar(SPACE, spaces));
 		result.append("_" + partialDividend + CR);
-		int multiplication = divider * divisionDigit;
 		spaces = indent + 2 - NumberUtils.getIntLength(multiplication);
 		result.append(repeatChar(SPACE, spaces));
 		result.append(multiplication + CR);
@@ -68,8 +66,7 @@ public class DivisionFormatter {
 		int dividend = divisionResult.getDividend();
 		int division = divisionResult.getDivision();
 		int partialDividend = divisionResult.getPartialDividend(0);
-		int divisionDigit = divisionResult.getDivisionDigit(0);
-		int multiplication = divider * divisionDigit;
+		int multiplication = divisionResult.getMultiplication(0);
 		int index = NumberUtils.getIntLength(partialDividend) - 1;
 
 		result.append("_" + dividend + "|" + divider + CR);

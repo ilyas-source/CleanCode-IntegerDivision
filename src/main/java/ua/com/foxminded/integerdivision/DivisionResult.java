@@ -23,6 +23,10 @@ public class DivisionResult {
 		return this.divisionSteps.get(index).getDivisionDigit();
 	}
 
+	public int getMultiplication(int index) {
+		return this.divisionSteps.get(index).getMultiplication();
+	}
+
 	public int getDividend() {
 		return dividend;
 	}

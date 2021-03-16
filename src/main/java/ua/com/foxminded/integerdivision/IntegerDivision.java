@@ -24,6 +24,7 @@ public class IntegerDivision {
 			DivisionStep divisionStep = new DivisionStep();
 			divisionStep.setPartialDividend(0);
 			divisionStep.setDivisionDigit(0);
+			divisionStep.setMultiplication(0);
 			divisionSteps.add(divisionStep);
 			divisionResult.setDivisionSteps(divisionSteps);
 			return divisionResult;
@@ -35,6 +36,7 @@ public class IntegerDivision {
 			DivisionStep divisionStep = new DivisionStep();
 			divisionStep.setPartialDividend(partialDividend);
 			divisionStep.setDivisionDigit(divisionDigit);
+			divisionStep.setMultiplication(divider * divisionDigit);
 			divisionSteps.add((DivisionStep) divisionStep.clone());
 			partialDividend = partialDividend - divider * divisionDigit;
 			division = divisionDigit;
@@ -51,6 +53,7 @@ public class IntegerDivision {
 				DivisionStep divisionStep = new DivisionStep();
 				divisionStep.setPartialDividend(partialDividend);
 				divisionStep.setDivisionDigit(divisionDigit);
+				divisionStep.setMultiplication(divider * divisionDigit);
 				divisionSteps.add((DivisionStep) divisionStep.clone());
 				partialDividend = partialDividend - divider * divisionDigit;
 				division = division * 10 + divisionDigit;
@@ -59,6 +62,7 @@ public class IntegerDivision {
 					DivisionStep divisionStep = new DivisionStep();
 					divisionStep.setPartialDividend(0);
 					divisionStep.setDivisionDigit(0);
+					divisionStep.setMultiplication(0);
 					divisionSteps.add((DivisionStep) divisionStep.clone());
 					division = division * 10;
 				}
@@ -72,7 +76,8 @@ public class IntegerDivision {
 		int lastDivisionDigit = divisionResult.getDivisionDigit(steps - 1);
 		divisionResult.setDivision(division);
 		divisionResult.setRemainder(lastPartialDividend - divider * lastDivisionDigit);
-		System.out.println(divisionResult);
+//		System.out.println("Final object for " + dividend + " and " + divider + " is:");
+//		System.out.println(divisionResult);
 		return divisionResult;
 	}
 }
