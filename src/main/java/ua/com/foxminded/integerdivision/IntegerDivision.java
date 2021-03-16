@@ -72,7 +72,7 @@ public class IntegerDivision {
 		int lastDivisionDigit = divisionResult.getDivisionDigit(steps - 1);
 		divisionResult.setDivision(division);
 		divisionResult.setRemainder(lastPartialDividend - divider * lastDivisionDigit);
-
+		System.out.println(divisionResult);
 		return divisionResult;
 	}
 }

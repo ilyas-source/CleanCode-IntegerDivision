@@ -23,11 +23,31 @@ public class DivisionFormatter {
 			partialDividend = divisionResult.getPartialDividend(j);
 
 			if (partialDividend > 0) {
-				result.append(createStep(partialDividend, divider, indent));
+//				result.append(createStep(partialDividend, divider, indent));
+				result.append(createStep(divisionResult.divisionSteps.get(j), divider, indent));
+				System.out.println(result);
 			}
 			indent++;
 		}
 		result.append(formatRemainder(remainder, indent));
+		return result.toString();
+	}
+
+	private String createStep(DivisionStep divisionStep, int divider, int indent) {
+		StringBuilder result = new StringBuilder();
+		int divisionDigit = divisionStep.getDivisionDigit();
+		int partialDividend = divisionStep.getPartialDividend();
+
+		int spaces = indent + 1 - NumberUtils.getIntLength(partialDividend);
+		result.append(repeatChar(SPACE, spaces));
+		result.append("_" + partialDividend + CR);
+		int multiplication = divider * divisionDigit;
+		spaces = indent + 2 - NumberUtils.getIntLength(multiplication);
+		result.append(repeatChar(SPACE, spaces));
+		result.append(multiplication + CR);
+		result.append(repeatChar(SPACE, spaces));
+		result.append(repeatChar(DASH, String.valueOf(multiplication).length()));
+		result.append(CR);
 		return result.toString();
 	}
 
@@ -40,24 +60,6 @@ public class DivisionFormatter {
 		result.append(repeatChar(SPACE, spaces));
 		result.append(remainder);
 		return result.toString();
-	}
-
-	private String createStep(int partialDividend, int divider, int index) {
-		StringBuilder result = new StringBuilder();
-		int divisionDigit = partialDividend / divider;
-
-		int spaces = index + 1 - NumberUtils.getIntLength(partialDividend);
-		result.append(repeatChar(SPACE, spaces));
-		result.append("_" + partialDividend + CR);
-		int multiplication = divider * divisionDigit;
-		spaces = index + 2 - NumberUtils.getIntLength(multiplication);
-		result.append(repeatChar(SPACE, spaces));
-		result.append(multiplication + CR);
-		result.append(repeatChar(SPACE, spaces));
-		result.append(repeatChar(DASH, String.valueOf(multiplication).length()));
-		result.append(CR);
-		return result.toString();
-
 	}
 
 	private String createHeader(DivisionResult divisionResult) {

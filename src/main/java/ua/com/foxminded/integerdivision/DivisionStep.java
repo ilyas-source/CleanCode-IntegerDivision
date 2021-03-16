@@ -1,5 +1,7 @@
 package ua.com.foxminded.integerdivision;
 
+import org.junit.platform.commons.util.ToStringBuilder;
+
 public class DivisionStep implements Cloneable {
 
 	private int partialDividend;
@@ -24,6 +26,11 @@ public class DivisionStep implements Cloneable {
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
+	}
+
+	@Override
+	public String toString() {
+		return partialDividend + "," + divisionDigit;
 	}
 
 	@Override
