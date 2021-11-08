@@ -5,7 +5,7 @@ Write an application integer-division that divides numbers and prints result int
 
 ## Problem:
 
-Main purpose of this task is to further improve clean code writing skills.
+Main purpose of this task is to further improve clean code writing and unit-testing skills.
 
 ## Technologies used:
 * Java
